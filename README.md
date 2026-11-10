@@ -9,7 +9,7 @@ The Workday practice skill suite, repackaged as one Microsoft 365 Copilot agent.
 - **What it cannot do** - run `wdcli`, touch a live tenant or Smartsheet, drive a browser, or run the suite's scripts.
   - It drafts and plans. It hands live steps back under "Finish this on your machine".
 - **How it is built** - `build/build_copilot_agent.py` regenerates everything in `dist/` from the installed suite.
-- **Status** - package built and all 20 build checks pass. **Not yet installed or tested inside Copilot.**
+- **Status** - package built and all 22 build checks pass. **Not yet installed or tested inside Copilot.**
 
 ## What is in this folder
 
@@ -145,13 +145,38 @@ python -I -B build/build_copilot_agent.py
 
 When a new skill joins the suite, add it to `suite_roster` and to one group in `build/groups.json`. The build fails until you do.
 
-## What the build checks (20 checks)
+**Anyone who clones this repo can rebuild.** You need the suite at `~/.claude/skills` and Python 3. Nothing else.
+
+## The name check
+
+The build fails if a packaged file contains a client, engagement or author name on the block list.
+
+- **The block list is `build/name-hashes.json`.** It is in this repo, so the check runs on every machine.
+- **It holds fingerprints, not names.** Each name is stored as a one-way hash. You cannot read a name from it.
+- **A hit fails the build.** The report gives the file and line, with the name masked (first letter plus stars).
+- **What it matches** - whole words, camel-case pieces of a word, and 2 or 3 neighbouring words.
+- **What it misses** - a name glued inside one lower-case word, and any name nobody has added.
+
+### Add a name (maintainer only)
+
+1. **Open `build/private-names.local.json`.** It is git-ignored and exists only on the maintainer's machine.
+2. **Add the name to the `names` list.** Add a replacement pair to `redactions` if you want it swapped automatically.
+3. **Refresh the fingerprints:**
+
+```bash
+python -I -B build/build_copilot_agent.py --update-name-hashes
+```
+
+4. **Rebuild, then commit `build/name-hashes.json`.** The build fails if the two files are out of step.
+
+## What the build checks (22 checks)
 
 - **Scope** - all 36 in-scope skills packaged, none twice, no excluded skill present.
 - **Platform limits** - 8 skills, each `SKILL.md` under 20,000 characters, 350 files total, folder depth, zip and file sizes, `SKILL.md` at the zip root.
 - **Agent text** - instructions under 8,000 characters and naming all 8 skills, name, description, 12 starters.
 - **Links** - every file path a `SKILL.md` lists exists in the package.
-- **Sanitize sweep** - blocks on author paths and known engagement names. Lists emails, long IDs, tenant URLs and phone numbers for review.
+- **Sanitize sweep** - blocks on author paths and listed names. Lists emails, long IDs, tenant URLs and phone numbers for review.
+- **Name check health** - the fingerprint file is present, and it matches the maintainer's private list.
 
 Also run separately on the unzipped package: `~/.claude/guards/firm_name_guard.py`. Result on 2026-11-10: clean.
 
@@ -162,10 +187,11 @@ Also run separately on the unzipped package: `~/.claude/guards/firm_name_guard.p
 - **Engagement names were found and removed.** The sweep found a client app name, a vendor name and a tenant alias in 7 suite files. They were replaced at the source on 2026-11-10 with "a client app", "the vendor" and "a dev tenant".
   - The build still applies a replacement map as a safety net. The report shows 0 replacements when the suite is clean.
   - The engagement's own deployment skill keeps its names. It is not part of this package.
-- **The real names are not in this repo.** They live in `build/private-names.local.json`, which is git-ignored.
-  - Format: `{"blocking_names": "<one regex>", "redactions": [["<regex>", "<replacement>"]]}`.
-  - Without that file the build still runs, but the name sweep is off. The build report opens that section with a warning.
-  - A teammate who clones this repo must get the file from the maintainer before rebuilding.
+- **The real names are not in this repo.** Only their fingerprints are. See "The name check" above.
+  - The real names live in `build/private-names.local.json`, which is git-ignored.
+  - Format: `{"names": ["<name>"], "blocking_names": "<one regex>", "redactions": [["<regex>", "<replacement>"]]}`.
+  - Without that file a build still blocks listed names. Only the automatic replacement is off.
+- **A fingerprint is not a vault.** A short or guessable name can be recovered by trying many guesses against the hash. Keep this repo private.
 - **The sweep only knows the names it was given.** A client name it has never seen would pass. Read `dist/BUILD_REPORT.md` and skim the package before sharing outside the immediate team.
 - **Guides still talk about Claude Code.** Each router `SKILL.md` tells Copilot how to translate. The guides themselves are unchanged.
 - **Cross-skill links** such as `../wd-auth/references/...` do not resolve across packages. The suite map in each `SKILL.md` tells Copilot where the other skill lives.

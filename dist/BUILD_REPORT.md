@@ -1,11 +1,15 @@
 # Build report
 
-**Result: PASS** - 20 of 20 checks passed.
+**Result: PASS** - 22 of 22 checks passed.
 
 Source suite: `v2.3 (2026-09-11)`. Limits checked against Microsoft Learn, 2026-11-10.
 
 ## Checks
 
+- **PASS** - Name fingerprint file present
+  - 5 fingerprints in build/name-hashes.json
+- **PASS** - Name fingerprints match the private name list
+  - in sync
 - **PASS** - Every listed member skill found in the suite
   - 36 skills
 - **PASS** - Every member has a description
@@ -44,7 +48,7 @@ Source suite: `v2.3 (2026-09-11)`. Limits checked against Microsoft Learn, 2026-
   - 383
 - **PASS** - At most 12 conversation starters
   - 12
-- **PASS** - Sanitize sweep: no blocking hits (author paths, engagement and author names)
+- **PASS** - Sanitize sweep: no blocking hits (author paths; names by private list and by fingerprint)
   - 0 hits
 
 ## The 8 skill packages

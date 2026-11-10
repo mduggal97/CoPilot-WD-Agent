@@ -21,14 +21,18 @@ WHAT IT DOES (in order)
 USAGE
     python -I -B build_copilot_agent.py                # build from ~/.claude/skills
     python -I -B build_copilot_agent.py --suite PATH   # build from another copy
+    python -I -B build_copilot_agent.py --update-name-hashes
+                                                       # maintainer only: refresh name-hashes.json
 
 Standard library only, on purpose: it must run on any teammate's machine.
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
+import secrets
 import shutil
 import sys
 import zipfile
@@ -81,10 +85,103 @@ SWEEP_BLOCKING = {
 }
 
 # Real client, engagement and author names must never sit in this repo - not even inside a
-# regex that hunts for them. They live in a git-ignored file beside this script:
-#   {"blocking_names": "<one regex, case-insensitive>", "redactions": [["<regex>", "<replacement>"], ...]}
-# Without the file the build still runs, but the name sweep is OFF and the report says so.
+# regex that hunts for them. So the name check has two halves:
+#
+#   1. name-hashes.json (COMMITTED) - a one-way fingerprint of each name. Anyone who clones
+#      the repo gets the BLOCK: the build fails if a packaged file contains a listed name.
+#      The fingerprint cannot be turned back into the name by reading it.
+#   2. private-names.local.json (GIT-IGNORED, maintainer only) - the real names:
+#        {"names": ["<name>", ...],                       <- source of the fingerprints
+#         "blocking_names": "<one regex, case-insensitive>",
+#         "redactions": [["<regex>", "<replacement>"], ...]}  <- the auto-REPLACE map
+#      A fingerprint can say "a name is here" but not what to replace it with, so
+#      auto-replace only runs on a machine that has this file.
+#
+# HONEST LIMIT: a fingerprint of a short or guessable name can be reversed by trying many
+# guesses. It stops reading and searching, not a determined person with repo access.
+# Keep the repo private.
 PRIVATE_NAMES_FILE = "private-names.local.json"
+NAME_HASHES_FILE = "name-hashes.json"
+NAME_LABEL = "engagement or author name"
+NAME_HASHES = {"salt": "", "hashes": set()}   # filled in main()
+_NAME_SEEN: dict[str, bool] = {}              # candidate -> is it a listed name (memo)
+_RUN = re.compile(r"[A-Za-z0-9]+")
+_CAMEL_PART = re.compile(r"[A-Z]+(?![a-z])|[A-Z]?[a-z]+|[0-9]+")
+
+
+def normalize_name(name: str) -> str:
+    """Lower-case and drop everything but letters and digits: 'Acme Health' -> 'acmehealth'."""
+    return re.sub(r"[^a-z0-9]", "", name.lower())
+
+
+def name_hash(salt: str, normalized: str) -> str:
+    return hashlib.sha256((salt + normalized).encode("utf-8")).hexdigest()
+
+
+def name_candidates(line: str):
+    """Yield (normalized text, text as written) for every spot a name could hide in a line.
+
+    A fingerprint only matches a whole string, so we must guess the name's boundaries:
+      - each word                        Acme
+      - camel-case pieces of a word      AcmePayroll -> Acme, Payroll, AcmePayroll
+      - 2 and 3 neighbouring words       Acme Health, Acme_Health_v2
+    Not caught: a name glued inside one all-lower-case word (acmepayroll).
+    """
+    runs = _RUN.findall(line)
+    low = [r.lower() for r in runs]
+    for i, run in enumerate(runs):
+        yield low[i], run
+        parts = _CAMEL_PART.findall(run)
+        if 1 < len(parts) <= 8:
+            for a in range(len(parts)):
+                for b in range(a + 1, len(parts) + 1):
+                    if b - a < len(parts):
+                        piece = "".join(parts[a:b])
+                        yield piece.lower(), piece
+        for n in (2, 3):
+            if i + n <= len(runs):
+                yield "".join(low[i:i + n]), " ".join(runs[i:i + n])
+
+
+def find_hashed_name(line: str) -> str | None:
+    """Return the first listed name found in the line (as written), or None."""
+    for cand, shown in name_candidates(line):
+        hit = _NAME_SEEN.get(cand)
+        if hit is None:
+            hit = _NAME_SEEN[cand] = name_hash(NAME_HASHES["salt"], cand) in NAME_HASHES["hashes"]
+        if hit:
+            return shown
+    return None
+
+
+def mask(text: str) -> str:
+    """First letter plus stars. The build report is committed, so it must not print a name."""
+    return text[:1] + "*" * (len(text) - 1)
+
+
+def update_name_hashes() -> int:
+    """Maintainer command: rewrite name-hashes.json from the private names list."""
+    private_path = HERE / PRIVATE_NAMES_FILE
+    if not private_path.is_file():
+        print(f"FAIL: build/{PRIVATE_NAMES_FILE} not found. Only the maintainer's machine can refresh the hashes.")
+        return 1
+    names = sorted({normalize_name(n) for n in json.loads(private_path.read_text(encoding="utf-8")).get("names", [])} - {""})
+    if not names:
+        print(f'FAIL: build/{PRIVATE_NAMES_FILE} has no "names" list.')
+        return 1
+    out_path = HERE / NAME_HASHES_FILE
+    # Keep the existing salt so an unchanged name keeps its fingerprint (small, readable diffs).
+    salt = json.loads(out_path.read_text(encoding="utf-8")).get("salt") if out_path.is_file() else None
+    salt = salt or secrets.token_hex(16)
+    doc = {
+        "_comment": "One-way fingerprints (salted SHA-256) of names the build must block. Generated - do not hand-edit. Refresh with: python -I -B build/build_copilot_agent.py --update-name-hashes",
+        "algorithm": "sha256(salt + lower-cased name with only letters and digits)",
+        "salt": salt,
+        "hashes": sorted(name_hash(salt, n) for n in names),
+    }
+    out_path.write_text(json.dumps(doc, indent=2) + "\n", encoding="utf-8", newline="\n")
+    print(f"Wrote build/{NAME_HASHES_FILE}: {len(names)} name fingerprints. Commit that file.")
+    return 0
 SWEEP_REVIEW = {
     # Not a Copilot limit (it was a claude.ai upload rule), so it reports, not blocks.
     "non-ASCII character": re.compile(r"[^\x00-\x7F]"),
@@ -295,10 +392,17 @@ def sweep(root: Path):
             continue
         rel = f.relative_to(root).as_posix()
         for n, line in enumerate(f.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
+            name_hit = False
             for label, rx in SWEEP_BLOCKING.items():
                 m = rx.search(line)
                 if m:
-                    blocking.append((label, rel, n, m.group(0)[:60]))
+                    is_name = label == NAME_LABEL
+                    name_hit = name_hit or is_name
+                    blocking.append((label, rel, n, mask(m.group(0)) if is_name else m.group(0)[:60]))
+            if NAME_HASHES["hashes"] and not name_hit:
+                found = find_hashed_name(line)
+                if found:
+                    blocking.append((NAME_LABEL, rel, n, mask(found)))
             for label, rx in SWEEP_REVIEW.items():
                 m = rx.search(line)
                 if m:
@@ -309,7 +413,10 @@ def sweep(root: Path):
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--suite", default=str(Path.home() / ".claude" / "skills"), help="folder holding the suite's skill folders")
+    ap.add_argument("--update-name-hashes", action="store_true", help="maintainer only: rewrite name-hashes.json from the private names list, then exit")
     args = ap.parse_args()
+    if args.update_name_hashes:
+        return update_name_hashes()
     suite = Path(args.suite)
     cfg = json.loads((HERE / "groups.json").read_text(encoding="utf-8"))
     groups = cfg["groups"]
@@ -321,7 +428,25 @@ def main() -> int:
     private = json.loads(private_path.read_text(encoding="utf-8")) if private_path.is_file() else {}
     names_loaded = bool(private.get("blocking_names"))
     if names_loaded:
-        SWEEP_BLOCKING["engagement or author name"] = re.compile(private["blocking_names"], re.I)
+        SWEEP_BLOCKING[NAME_LABEL] = re.compile(private["blocking_names"], re.I)
+    # Committed fingerprints: the name BLOCK that works on every machine.
+    hash_path = HERE / NAME_HASHES_FILE
+    hash_doc = json.loads(hash_path.read_text(encoding="utf-8")) if hash_path.is_file() else {}
+    NAME_HASHES["salt"] = hash_doc.get("salt", "")
+    NAME_HASHES["hashes"] = set(hash_doc.get("hashes", []))
+    hashes_loaded = bool(NAME_HASHES["salt"] and NAME_HASHES["hashes"])
+    checks.append(("Name fingerprint file present", hashes_loaded,
+                   f"{len(NAME_HASHES['hashes'])} fingerprints in build/{NAME_HASHES_FILE}" if hashes_loaded else f"build/{NAME_HASHES_FILE} missing or empty"))
+    # Drift guard: a name added to the private list but never fingerprinted would be
+    # blocked on the maintainer's machine and silently allowed on everyone else's.
+    private_names = {normalize_name(n) for n in private.get("names", [])} - {""}
+    if private_names:
+        want = {name_hash(NAME_HASHES["salt"], n) for n in private_names}
+        in_sync = want == NAME_HASHES["hashes"]
+        checks.append(("Name fingerprints match the private name list", in_sync,
+                       "in sync" if in_sync else "out of sync - run --update-name-hashes and commit the file"))
+    else:
+        checks.append(("Name fingerprints match the private name list", True, "not checked here - the private list is not on this machine"))
     REDACTIONS[:] = [(re.compile(pat), repl) for pat, repl in private.get("redactions", []) + cfg.get("redactions", [])]
 
     src_root = DIST / "skills-src"
@@ -448,7 +573,14 @@ def main() -> int:
     for extra in (instr, profile):
         if extra.is_file() and SWEEP_REVIEW["non-ASCII character"].search(extra.read_text(encoding="utf-8")):
             review.append(("non-ASCII character", extra.name, 0, ""))
-    sweep_scope = "author paths, engagement and author names" if names_loaded else f"author paths ONLY - name sweep OFF, {PRIVATE_NAMES_FILE} not found"
+    if names_loaded and hashes_loaded:
+        sweep_scope = "author paths; names by private list and by fingerprint"
+    elif hashes_loaded:
+        sweep_scope = "author paths; names by fingerprint"
+    elif names_loaded:
+        sweep_scope = "author paths; names by private list only"
+    else:
+        sweep_scope = "author paths ONLY - name sweep OFF"
     checks.append((f"Sanitize sweep: no blocking hits ({sweep_scope})", not blocking, f"{len(blocking)} hits"))
 
     # 6. Report -------------------------------------------------------------------------
@@ -464,10 +596,15 @@ def main() -> int:
     for g in groups:
         n, size, _ = zip_info[g["name"]]
         r.append(f"- **{g['name']}.zip** - {len(g['members'])} member skill{'s' if len(g['members']) != 1 else ''}, {n} files, {size / 1024:,.0f} KB, SKILL.md {sizes[g['name']]:,} characters")
-    if not names_loaded:
+    if not names_loaded and not hashes_loaded:
         r += ["", "## WARNING - name sweep did not run", "",
-              f"`build/{PRIVATE_NAMES_FILE}` was not found, so this build did not check for client, engagement or author names.",
-              "Do not share this package until it is rebuilt on a machine that has that file."]
+              f"Neither `build/{NAME_HASHES_FILE}` nor `build/{PRIVATE_NAMES_FILE}` was found, so this build did not check for client, engagement or author names.",
+              "Do not share this package until that is fixed."]
+    elif not names_loaded:
+        r += ["", "## Note - names were checked by fingerprint", "",
+              "This machine does not have the private name list. That is normal for anyone but the maintainer.",
+              "- **Blocking still works.** A listed name in the package fails this build.",
+              "- **Auto-replace is off.** If the build fails on a name, fix the wording in the suite, or ask the maintainer to rebuild."]
     r += ["", "## Sanitize sweep - blocking hits", ""]
     r += [f"- {l}: `{f}` line {n}: `{s}`" for l, f, n, s in blocking] or ["- None."]
     r += ["", f"## Sanitize sweep - hits to review by eye ({len(review)})", "",
