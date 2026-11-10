@@ -1,0 +1,149 @@
+{
+  "suite_version": "v2.3 (2026-09-11)",
+  "_comment": "Single owner of the packaging map. suite_roster = all 38 skills in the suite. excluded = the sales-focused skills left out by decision on 2026-11-10. Every roster skill that is not excluded must appear in exactly one group; the build fails otherwise.",
+  "suite_roster": [
+    "practice-lifecycle",
+    "wd-extend-lifecycle",
+    "wd-delivery-methodology",
+    "wd-practice-ops",
+    "wd-suite-feedback",
+    "session-orchestration",
+    "wd-folder-hygiene",
+    "market-research",
+    "wd-estimate",
+    "wd-contracts",
+    "wd-discovery",
+    "wd-design-doc",
+    "wd-design-visuals",
+    "wd-systems-diagrams",
+    "wd-solution-playbooks",
+    "wd-extend-dev",
+    "wd-auth",
+    "wd-integration-dev",
+    "wd-testing",
+    "wd-test-execution",
+    "wd-deployment",
+    "wd-tenant-config",
+    "wd-post-go-live",
+    "wd-pm",
+    "wd-smartsheet",
+    "wd-comms",
+    "wd-kt",
+    "wd-change-adoption",
+    "wd-demo",
+    "app-architecture",
+    "app-hosting",
+    "app-agentic",
+    "app-harness",
+    "saas-integration",
+    "product-strategy",
+    "product-operations",
+    "bow-sales-enablement",
+    "product-gtm"
+  ],
+  "excluded": [
+    "bow-sales-enablement",
+    "product-gtm"
+  ],
+  "_redactions_comment": "Applied in order to the PACKAGED copies only (regex -> replacement). GENERIC patterns only in this file. Real client, engagement and author names never go here: they live in build/private-names.local.json, which is git-ignored and applied first.",
+  "redactions": [
+    [
+      "[A-Za-z]+_wcpdev[0-9]*",
+      "a dev tenant"
+    ]
+  ],
+  "groups": [
+    {
+      "name": "wd-suite-router",
+      "title": "Suite router, methodology and practice operations",
+      "description": "Front door for Workday practice work. Use when the user is starting something new, asks what to do next, which phase a project is in, which skill handles a task, or wants to be walked through a Workday Extend or integration project start to finish. Also owns the delivery quality gates, the kickoff checklist, the AI data-handling rules, full-program Workday deployment methodology (phases, roles, RACI, governance, configuration guides), practice operations (onboarding, certifications, staffing, utilization, partner program), project-folder structure and archiving rules, splitting work across sessions, and logging feedback about this skill suite.",
+      "members": [
+        "practice-lifecycle",
+        "wd-extend-lifecycle",
+        "wd-delivery-methodology",
+        "wd-practice-ops",
+        "wd-suite-feedback",
+        "session-orchestration",
+        "wd-folder-hygiene"
+      ]
+    },
+    {
+      "name": "wd-scope-and-contract",
+      "title": "Scope, estimate, contract and discovery",
+      "description": "Use for the front end of a Workday Extend or integration engagement: deciding whether an app or product is worth building (market research, opportunity sizing, build or no-build), reviewing an RFP, estimating level of effort by role and phase, building a timeline or quote, filling the estimate workbook, drafting a statement of work or subscription agreement, and running discovery (intake questions, kickoff questions, current-state documentation, requirements gathering, solution-options assessment).",
+      "members": [
+        "market-research",
+        "wd-estimate",
+        "wd-contracts",
+        "wd-discovery"
+      ]
+    },
+    {
+      "name": "wd-design",
+      "title": "Design documents, visuals and domain playbooks",
+      "description": "Use for Workday Extend and integration design work: writing or reviewing a design document or integration design document (requirements, field specifications, object model, open items, change control, design sign-off), wireframes, swimlane process flows, flowcharts, sequence and state diagrams, system-level integration landscape diagrams, and per-domain technical playbooks that name the configuration objects, web services, report sources and connectors behind HCM, recruiting, time, absence, compensation, benefits, payroll, financials, procurement, projects, grants, student, analytics and planning.",
+      "members": [
+        "wd-design-doc",
+        "wd-design-visuals",
+        "wd-systems-diagrams",
+        "wd-solution-playbooks"
+      ]
+    },
+    {
+      "name": "wd-extend-build",
+      "title": "Workday Extend and Orchestrate build, and authentication",
+      "description": "Use for building, changing, reviewing or debugging a Workday Extend app or an Orchestrate for Integrations (O4I) orchestration: PMD pages, pods, scripts, business objects, security domains, Model business processes, wdcli commands, coding standards, platform limits, code review and audits, reading Workday data with WQL or RaaS or custom reports, Prism, custom agents and GenAI calls. Also use for Workday authentication: OAuth API clients, tokens, credential storage, login failures such as 401, 403, invalid_grant or tenant not found, and choosing an auth mode.",
+      "members": [
+        "wd-extend-dev",
+        "wd-auth"
+      ]
+    },
+    {
+      "name": "wd-integration-build",
+      "title": "Traditional Workday integrations",
+      "description": "Use for traditional Workday integrations: EIB inbound and outbound, Workday Studio assemblies, Core Connector, Document Transformation, XSLT, flat-file output, integration naming (integration IDs, integration system users and security groups), build and design checklists, migration, code review of Studio or EIB source, and inventorying a tenant's SOAP web services. Not for Orchestrate flows or Extend apps.",
+      "members": [
+        "wd-integration-dev"
+      ]
+    },
+    {
+      "name": "wd-test-deploy-run",
+      "title": "Testing, deployment, tenant setup and post-go-live",
+      "description": "Use for Workday Extend and integration testing, deployment and run: deriving unit test scenarios, UAT planning, deciding defect versus change request, writing a test execution plan and evidence record, tenant promotion across development, implementation, sandbox and production, cutover and go-live planning, data conversion, the Workday production-approval documents (volumes questionnaire, performance testing), tenant setup recipes, end-user security design and segregation of duties, creating test data, hypercare, production integration failure triage, data retention and export, release regression and closeout.",
+      "members": [
+        "wd-testing",
+        "wd-test-execution",
+        "wd-deployment",
+        "wd-tenant-config",
+        "wd-post-go-live"
+      ]
+    },
+    {
+      "name": "wd-project-delivery",
+      "title": "Project management, communications, training and change",
+      "description": "Use for running a Workday engagement day to day: meeting agendas, project plans, timelines, weekly status reports, RAID log, action items, turning a meeting transcript into decisions and actions, Smartsheet tracker updates, client emails, Teams posts, escalation notes and go-live announcements, user guides, admin guides, runbooks, release notes, training decks and knowledge-transfer sessions, organizational change management (stakeholder analysis, change impact, communications plan, training plan, adoption metrics), and preparing or scripting a demo.",
+      "members": [
+        "wd-pm",
+        "wd-smartsheet",
+        "wd-comms",
+        "wd-kt",
+        "wd-change-adoption",
+        "wd-demo"
+      ]
+    },
+    {
+      "name": "tool-and-product-build",
+      "title": "Building and running hosted tools and products (not Workday Extend)",
+      "description": "Use when the work is a general web app, internal tool or agentic tool that is NOT a Workday Extend app: structuring the code into modules, hosting on AWS (App Runner, RDS, Bedrock, Entra, CloudFormation), adding an AI agent runtime (tool-use loop, spend caps, long-running jobs, MCP server), build discipline and guard hooks, integrating with non-Workday SaaS such as Salesforce, ServiceNow, Snowflake, Databricks, Epic or UKG, deciding internal accelerator versus customer product, and operating a sold product (SLA, incidents, billing, customer success, compliance).",
+      "members": [
+        "app-architecture",
+        "app-hosting",
+        "app-agentic",
+        "app-harness",
+        "saas-integration",
+        "product-strategy",
+        "product-operations"
+      ]
+    }
+  ]
+}

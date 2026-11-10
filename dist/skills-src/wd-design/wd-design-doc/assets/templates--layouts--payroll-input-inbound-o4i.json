@@ -1,0 +1,1416 @@
+{
+  "slug": "payroll-input-inbound-o4i",
+  "template": "idd",
+  "_comment": [
+    "A layout CALIBRATION: the per-tab widths and structure directives recorded from ONE",
+    "hand-cleaned document by scripts/xlsx_extract_layout.py (diffed against its pre-style backup).",
+    "Its inject/move directives carry that document's own text, so it must never land on another",
+    "document. scripts/xlsx_layout_match.py applies it only to a workbook whose identity cells",
+    "(templates/idd.json identity_cells) equal `match`."
+  ],
+  "source": "the Payroll Input Inbound O4I reference IDD, v0.3 hand-cleaned copy (each tab's source names the file)",
+  "match": null,
+  "_match_comment": [
+    "UNBOUND (2026-10-17). Moved verbatim out of templates/idd.json, where it applied to every",
+    "workbook. The reference document is not on this machine, so the Integration ID and Name it",
+    "was calibrated with are unknown, and an unbound calibration never applies. To use it again on",
+    "that document, run once on its pre-style backup:",
+    "    python scripts/xlsx_layout_match.py <pre-style-backup> --bind payroll-input-inbound-o4i"
+  ],
+  "tab_layouts": {
+    "Requirements": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.9,
+        "B": 12.1,
+        "C": 49.0,
+        "D": 92.7,
+        "E": 38.0,
+        "F": 9.7,
+        "G": 10.3,
+        "H": 9.7,
+        "I": 3.4,
+        "J": 50.6,
+        "K": 9.1
+      },
+      "panel_merges": [
+        "B6:I6",
+        "B7:H7",
+        "J7:J35"
+      ],
+      "structure": [
+        {
+          "op": "unmerge",
+          "range": "J7:R49",
+          "reason": "clear the template's horizontal J:R note stack; the tall callout replaces it"
+        },
+        {
+          "op": "merge",
+          "range": "B6:I6",
+          "row_pt": 15.75,
+          "reason": "intro band spanning the left block into the gutter; thin band once merged wide (matches josh_upds r6=15.75)"
+        },
+        {
+          "op": "merge",
+          "range": "J7:J35",
+          "reason": "tall Notes callout beside the requirements table (tail verified empty)"
+        },
+        {
+          "op": "border",
+          "range": "J7:J35",
+          "edges": "box",
+          "reason": "outline the Notes callout as a boxed card (matches josh_upds)"
+        }
+      ]
+    },
+    "File": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.9,
+        "B": 11.3,
+        "C": 23.3,
+        "D": 11.3,
+        "E": 25.7,
+        "F": 25.1,
+        "G": 13.1,
+        "H": 22.7,
+        "I": 10.3,
+        "J": 27.6,
+        "K": 12.9,
+        "L": 9.7,
+        "M": 29.3,
+        "N": 9.7,
+        "O": 17.1,
+        "P": 65.9,
+        "Q": 46.4,
+        "R": 9.1
+      },
+      "panel_merges": [
+        "B14:Q14",
+        "B6:C6",
+        "B7:O7",
+        "C12:F12",
+        "D6:F6",
+        "H10:O10",
+        "H11:O11",
+        "H12:O12",
+        "H8:O8",
+        "H9:O9"
+      ],
+      "structure": [
+        {
+          "op": "unmerge",
+          "range": "S3:X4",
+          "reason": "drop the legacy logo-lockup merge the maintainer removed; the wordmark is re-anchored as a floating image, not a merged cell"
+        },
+        {
+          "op": "merge",
+          "range": "B6:C6",
+          "reason": "file-name label cell of the top identity band"
+        },
+        {
+          "op": "merge",
+          "range": "B7:O7",
+          "reason": "File Properties section band across the panel block"
+        },
+        {
+          "op": "merge",
+          "range": "C12:F12",
+          "reason": "First-Row-Header value spans the left property panel"
+        },
+        {
+          "op": "merge",
+          "range": "B14:Q14",
+          "row_pt": 15.75,
+          "reason": "Layout section band across the full layout table; thin band (matches josh_upds r14=15.75)"
+        }
+      ]
+    },
+    "READ ME": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.9,
+        "B": 11.3
+      },
+      "panel_merges": [
+        "B11:L11",
+        "B13:L13",
+        "B2:L2",
+        "B3:L3",
+        "B4:L4",
+        "B6:L6",
+        "B7:L7",
+        "B9:L9"
+      ],
+      "structure": []
+    },
+    "Version Control": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.9,
+        "B": 9.7,
+        "D": 9.7,
+        "E": 67.4,
+        "F": 124.1,
+        "G": 9.1
+      },
+      "panel_merges": [
+        "B6:F6"
+      ],
+      "structure": []
+    },
+    "Question": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.9,
+        "B": 10.3,
+        "C": 9.7,
+        "D": 47.6,
+        "E": 92.7,
+        "F": 75.0,
+        "G": 9.1
+      },
+      "panel_merges": [
+        "B6:F6",
+        "B7:F7"
+      ],
+      "structure": [
+        {
+          "op": "unmerge",
+          "range": "B52:C52",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "B63:F64",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "B73:F74",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "inject",
+          "cell": "C52",
+          "value": "Open #"
+        },
+        {
+          "op": "inject",
+          "cell": "B60",
+          "value": "Testing"
+        },
+        {
+          "op": "inject",
+          "cell": "B61",
+          "value": "Status"
+        },
+        {
+          "op": "inject",
+          "cell": "D61",
+          "value": "Question"
+        },
+        {
+          "op": "inject",
+          "cell": "E61",
+          "value": "Answer"
+        },
+        {
+          "op": "move",
+          "from": "F74",
+          "to": "F61"
+        },
+        {
+          "op": "move",
+          "from": "B75",
+          "to": "B62"
+        },
+        {
+          "op": "inject",
+          "cell": "D62",
+          "value": "Who is our contact for testing?"
+        },
+        {
+          "op": "inject",
+          "cell": "E62",
+          "value": "TBD \u2014 Q: testing contact. Owner: engagement lead."
+        },
+        {
+          "op": "inject",
+          "cell": "D63",
+          "value": "Does vendor have a test system for use in implementation projects?"
+        },
+        {
+          "op": "inject",
+          "cell": "E63",
+          "value": "N/A \u2014 no external vendor system. Testing is against a Workday implementation tenant using client-supplied sample files."
+        },
+        {
+          "op": "move",
+          "from": "F68",
+          "to": "F65"
+        },
+        {
+          "op": "move",
+          "from": "F72",
+          "to": "F69"
+        },
+        {
+          "op": "inject",
+          "cell": "F71",
+          "value": "Background: Why does this matter, what is the impact?"
+        },
+        {
+          "op": "move",
+          "from": "D76",
+          "to": "D73"
+        },
+        {
+          "op": "move",
+          "from": "E76",
+          "to": "E73"
+        },
+        {
+          "op": "merge",
+          "range": "B60:F60"
+        },
+        {
+          "op": "merge",
+          "range": "B61:C61"
+        },
+        {
+          "op": "merge",
+          "range": "B70:F70"
+        },
+        {
+          "op": "merge",
+          "range": "B71:C71"
+        }
+      ]
+    },
+    "Overview": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.9,
+        "B": 50.4,
+        "C": 12.1,
+        "D": 23.4,
+        "E": 12.1,
+        "F": 12.1,
+        "G": 22.0,
+        "H": 3.4,
+        "I": 19.4,
+        "J": 80.7,
+        "K": 9.1,
+        "P": 9.1
+      },
+      "panel_merges": [
+        "A3:B3",
+        "B7:G17",
+        "I7:J7"
+      ],
+      "structure": [
+        {
+          "op": "unmerge",
+          "range": "J53:T53",
+          "reason": "clear template merges the author removed here"
+        }
+      ]
+    },
+    "WD Solution - General": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.1,
+        "B": 35.4,
+        "C": 22.9,
+        "D": 31.1,
+        "E": 63.6,
+        "F": 3.4,
+        "G": 39.1,
+        "H": 26.9,
+        "I": 75.0,
+        "J": 9.1
+      },
+      "panel_merges": [
+        "G14:I14",
+        "G7:I7"
+      ],
+      "structure": [
+        {
+          "op": "unmerge",
+          "range": "B7:E7",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "B16:E16",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "B24:E25",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "B34:E34",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "B43:E43",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "G44:I44",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "B51:E52",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "G56:I56",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "B61:E61",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "G68:I68",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "B69:E69",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "merge",
+          "range": "G7:I7"
+        },
+        {
+          "op": "merge",
+          "range": "G61:H61"
+        },
+        {
+          "op": "merge",
+          "range": "G62:H62"
+        },
+        {
+          "op": "merge",
+          "range": "G69:I69"
+        }
+      ]
+    },
+    "WD Solution - O4I": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.9,
+        "B": 22.7,
+        "C": 19.7,
+        "D": 75.4,
+        "E": 11.3,
+        "F": 60.3,
+        "G": 3.4,
+        "H": 62.9,
+        "I": 20.7,
+        "J": 59.6,
+        "K": 9.1
+      },
+      "panel_merges": [
+        "B7:F7",
+        "E10:F10",
+        "E11:F11",
+        "E12:F12",
+        "E13:F13",
+        "E14:F14",
+        "E8:F8",
+        "E9:F9",
+        "H10:I10",
+        "H11:I11",
+        "H12:I12",
+        "H13:I13",
+        "H14:I14",
+        "H7:L7",
+        "H9:I9"
+      ],
+      "structure": [
+        {
+          "op": "unmerge",
+          "range": "H48:J48",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "H57:J57",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "H77:I83",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "H88:J88",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "inject",
+          "cell": "H40",
+          "value": "Security Business Processes"
+        },
+        {
+          "op": "inject",
+          "cell": "H41",
+          "value": "Business Process Type"
+        },
+        {
+          "op": "inject",
+          "cell": "I41",
+          "value": "Permissions"
+        },
+        {
+          "op": "inject",
+          "cell": "J41",
+          "value": "Associated Group"
+        },
+        {
+          "op": "inject",
+          "cell": "H42",
+          "value": "N/A \u2014 this integration does not initiate or participate in a business process. It writes Payroll Input directly."
+        },
+        {
+          "op": "move",
+          "from": "I50",
+          "to": "I42"
+        },
+        {
+          "op": "move",
+          "from": "J50",
+          "to": "J42"
+        },
+        {
+          "op": "inject",
+          "cell": "H52",
+          "value": "Web Services"
+        },
+        {
+          "op": "move",
+          "from": "H57",
+          "to": "H53"
+        },
+        {
+          "op": "move",
+          "from": "H62",
+          "to": "H54"
+        },
+        {
+          "op": "move",
+          "from": "I62",
+          "to": "I54"
+        },
+        {
+          "op": "move",
+          "from": "J62",
+          "to": "J54"
+        },
+        {
+          "op": "inject",
+          "cell": "H55",
+          "value": "Payroll"
+        },
+        {
+          "op": "move",
+          "from": "I66",
+          "to": "I55"
+        },
+        {
+          "op": "inject",
+          "cell": "J55",
+          "value": "PRIMARY WRITE. Bulk operation: one request carries a request-level Default_Batch_ID plus many Payroll_Input_Data children. Chosen over Submit_/Put_Payroll_Input because those are singular-transaction services meant for BP-triggered integrations, not file loads. Version pinned by the 'Web Service Version' attribute."
+        },
+        {
+          "op": "move",
+          "from": "H67",
+          "to": "I56"
+        },
+        {
+          "op": "move",
+          "from": "J67",
+          "to": "J56"
+        },
+        {
+          "op": "inject",
+          "cell": "H64",
+          "value": "Integration Subscriptions"
+        },
+        {
+          "op": "inject",
+          "cell": "H65",
+          "value": "Subscriptions"
+        },
+        {
+          "op": "move",
+          "from": "H87",
+          "to": "H74"
+        },
+        {
+          "op": "move",
+          "from": "I89",
+          "to": "I76"
+        },
+        {
+          "op": "move",
+          "from": "J89",
+          "to": "J76"
+        },
+        {
+          "op": "merge",
+          "range": "H7:L7"
+        },
+        {
+          "op": "merge",
+          "range": "H26:J26"
+        },
+        {
+          "op": "merge",
+          "range": "H40:J40"
+        },
+        {
+          "op": "merge",
+          "range": "H53:J53"
+        },
+        {
+          "op": "merge",
+          "range": "H64:J64"
+        },
+        {
+          "op": "merge",
+          "range": "H66:I66"
+        },
+        {
+          "op": "merge",
+          "range": "H67:I67"
+        },
+        {
+          "op": "merge",
+          "range": "H68:I68"
+        },
+        {
+          "op": "merge",
+          "range": "H69:I69"
+        },
+        {
+          "op": "merge",
+          "range": "H70:I70"
+        },
+        {
+          "op": "merge",
+          "range": "H71:I71"
+        },
+        {
+          "op": "merge",
+          "range": "H72:I72"
+        },
+        {
+          "op": "merge",
+          "range": "H73:I73"
+        }
+      ]
+    },
+    "WD Solution - CC": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.1,
+        "B": 99.4,
+        "C": 23.1,
+        "D": 12.4,
+        "E": 19.4,
+        "F": 9.0,
+        "G": 36.1,
+        "H": 45.9,
+        "I": 19.9,
+        "J": 33.6,
+        "K": 18.0,
+        "L": 12.9,
+        "M": 7.3,
+        "N": 9.1
+      },
+      "panel_merges": [
+        "G14:I14",
+        "G7:I7"
+      ],
+      "structure": [
+        {
+          "op": "unmerge",
+          "range": "B7:E7",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "B21:E21",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "B44:E44",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "G44:I44",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "G56:I56",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "B60:E60",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "G68:I68",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "merge",
+          "range": "G7:I7"
+        },
+        {
+          "op": "merge",
+          "range": "G45:I45"
+        },
+        {
+          "op": "merge",
+          "range": "G60:H60"
+        },
+        {
+          "op": "merge",
+          "range": "G61:H61"
+        }
+      ]
+    },
+    "Field Overrides - CC": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.1,
+        "B": 99.4,
+        "C": 99.4,
+        "D": 23.1,
+        "E": 12.4,
+        "F": 19.4,
+        "G": 9.0,
+        "H": 36.1,
+        "I": 45.9,
+        "J": 19.9,
+        "K": 33.6,
+        "L": 18.0,
+        "M": 12.9,
+        "N": 7.3,
+        "O": 9.1
+      },
+      "panel_merges": [
+        "B14:E14",
+        "B7:F7",
+        "G7:J7",
+        "P5:S10"
+      ],
+      "structure": [
+        {
+          "op": "unmerge",
+          "range": "B6:J6",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "merge",
+          "range": "P5:S10"
+        }
+      ]
+    },
+    "API": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.9,
+        "B": 9.7,
+        "C": 12.1,
+        "D": 22.7,
+        "E": 33.3,
+        "F": 14.1,
+        "G": 22.7,
+        "H": 32.4,
+        "I": 46.6,
+        "J": 92.7,
+        "K": 9.1
+      },
+      "panel_merges": [
+        "B6:J6"
+      ],
+      "structure": []
+    },
+    "Report": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.1,
+        "B": 25.3,
+        "C": 28.4,
+        "D": 30.3,
+        "E": 63.6,
+        "F": 15.6,
+        "G": 19.9,
+        "H": 18.4,
+        "I": 23.3,
+        "J": 22.6,
+        "K": 18.6
+      },
+      "panel_merges": [
+        "B5:K5",
+        "E8:H13"
+      ],
+      "structure": [
+        {
+          "op": "unmerge",
+          "range": "B7:K7",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "move",
+          "from": "E6",
+          "to": "E7"
+        },
+        {
+          "op": "inject",
+          "cell": "B8",
+          "value": "Report Name"
+        },
+        {
+          "op": "inject",
+          "cell": "E8",
+          "value": "This should be a brief description about the report, it's purpose, and high level understanding of how it will be used."
+        },
+        {
+          "op": "inject",
+          "cell": "B9",
+          "value": "Data Source"
+        },
+        {
+          "op": "inject",
+          "cell": "B10",
+          "value": "Data Source Filter"
+        },
+        {
+          "op": "inject",
+          "cell": "B11",
+          "value": "Data Source Type"
+        },
+        {
+          "op": "inject",
+          "cell": "B12",
+          "value": "Primary Business Object"
+        },
+        {
+          "op": "inject",
+          "cell": "B13",
+          "value": "Report Tags"
+        },
+        {
+          "op": "inject",
+          "cell": "B15",
+          "value": "Report Columns"
+        },
+        {
+          "op": "inject",
+          "cell": "B16",
+          "value": "Business Object"
+        },
+        {
+          "op": "inject",
+          "cell": "C16",
+          "value": "Field"
+        },
+        {
+          "op": "inject",
+          "cell": "D16",
+          "value": "Column Heading"
+        },
+        {
+          "op": "inject",
+          "cell": "E16",
+          "value": "XML Alias"
+        },
+        {
+          "op": "inject",
+          "cell": "F16",
+          "value": "Format"
+        },
+        {
+          "op": "inject",
+          "cell": "G16",
+          "value": "Options"
+        },
+        {
+          "op": "inject",
+          "cell": "B28",
+          "value": "Group Column Headings"
+        },
+        {
+          "op": "inject",
+          "cell": "D28",
+          "value": "\u00a0"
+        },
+        {
+          "op": "inject",
+          "cell": "B29",
+          "value": "Business Object"
+        },
+        {
+          "op": "inject",
+          "cell": "C29",
+          "value": "Group Column Heading"
+        },
+        {
+          "op": "inject",
+          "cell": "D29",
+          "value": "Group Column Heading XML Alias"
+        },
+        {
+          "op": "inject",
+          "cell": "B30",
+          "value": "\u00a0"
+        },
+        {
+          "op": "inject",
+          "cell": "C30",
+          "value": "\u00a0"
+        },
+        {
+          "op": "inject",
+          "cell": "D30",
+          "value": "\u00a0"
+        },
+        {
+          "op": "inject",
+          "cell": "B31",
+          "value": "\u00a0"
+        },
+        {
+          "op": "inject",
+          "cell": "C31",
+          "value": "\u00a0"
+        },
+        {
+          "op": "inject",
+          "cell": "D31",
+          "value": "\u00a0"
+        },
+        {
+          "op": "inject",
+          "cell": "B32",
+          "value": "\u00a0"
+        },
+        {
+          "op": "inject",
+          "cell": "C32",
+          "value": "\u00a0"
+        },
+        {
+          "op": "inject",
+          "cell": "D32",
+          "value": "\u00a0"
+        },
+        {
+          "op": "inject",
+          "cell": "B33",
+          "value": "\u00a0"
+        },
+        {
+          "op": "inject",
+          "cell": "C33",
+          "value": "\u00a0"
+        },
+        {
+          "op": "inject",
+          "cell": "D33",
+          "value": "\u00a0"
+        },
+        {
+          "op": "inject",
+          "cell": "B35",
+          "value": "Sort"
+        },
+        {
+          "op": "inject",
+          "cell": "B36",
+          "value": "Field"
+        },
+        {
+          "op": "inject",
+          "cell": "C36",
+          "value": "Sort Direction"
+        },
+        {
+          "op": "inject",
+          "cell": "D36",
+          "value": "Display Headers"
+        },
+        {
+          "op": "inject",
+          "cell": "E36",
+          "value": "Summarize Detail Rows"
+        },
+        {
+          "op": "inject",
+          "cell": "F36",
+          "value": "Display Subtotals"
+        },
+        {
+          "op": "inject",
+          "cell": "G36",
+          "value": "Group Name Override"
+        },
+        {
+          "op": "inject",
+          "cell": "B42",
+          "value": "Sub Level Sort"
+        },
+        {
+          "op": "inject",
+          "cell": "B43",
+          "value": "Field"
+        },
+        {
+          "op": "inject",
+          "cell": "C43",
+          "value": "Sort Direction"
+        },
+        {
+          "op": "inject",
+          "cell": "B49",
+          "value": "Filter"
+        },
+        {
+          "op": "inject",
+          "cell": "B50",
+          "value": "And/Or"
+        },
+        {
+          "op": "inject",
+          "cell": "C50",
+          "value": "("
+        },
+        {
+          "op": "inject",
+          "cell": "D50",
+          "value": "Field"
+        },
+        {
+          "op": "inject",
+          "cell": "E50",
+          "value": "Operator"
+        },
+        {
+          "op": "inject",
+          "cell": "F50",
+          "value": "Comparison Type"
+        },
+        {
+          "op": "inject",
+          "cell": "G50",
+          "value": "Comparison Value"
+        },
+        {
+          "op": "inject",
+          "cell": "H50",
+          "value": ")"
+        },
+        {
+          "op": "inject",
+          "cell": "I50",
+          "value": "Indexed"
+        },
+        {
+          "op": "inject",
+          "cell": "B56",
+          "value": "Sub Filter"
+        },
+        {
+          "op": "inject",
+          "cell": "B57",
+          "value": "Business Object"
+        },
+        {
+          "op": "inject",
+          "cell": "C57",
+          "value": "Order"
+        },
+        {
+          "op": "inject",
+          "cell": "D57",
+          "value": "And/Or"
+        },
+        {
+          "op": "inject",
+          "cell": "E57",
+          "value": "("
+        },
+        {
+          "op": "inject",
+          "cell": "F57",
+          "value": "Field"
+        },
+        {
+          "op": "inject",
+          "cell": "G57",
+          "value": "Operator"
+        },
+        {
+          "op": "inject",
+          "cell": "H57",
+          "value": "Comparison Type"
+        },
+        {
+          "op": "inject",
+          "cell": "I57",
+          "value": "Comparison Value"
+        },
+        {
+          "op": "inject",
+          "cell": "J57",
+          "value": ")"
+        },
+        {
+          "op": "inject",
+          "cell": "B63",
+          "value": "Prompts"
+        },
+        {
+          "op": "inject",
+          "cell": "B64",
+          "value": "Field"
+        },
+        {
+          "op": "inject",
+          "cell": "C64",
+          "value": "Prompt Qualifier"
+        },
+        {
+          "op": "inject",
+          "cell": "D64",
+          "value": "Label"
+        },
+        {
+          "op": "inject",
+          "cell": "E64",
+          "value": "XML Alias"
+        },
+        {
+          "op": "inject",
+          "cell": "F64",
+          "value": "Default Type"
+        },
+        {
+          "op": "inject",
+          "cell": "G64",
+          "value": "Default Value"
+        },
+        {
+          "op": "inject",
+          "cell": "H64",
+          "value": "Required"
+        },
+        {
+          "op": "inject",
+          "cell": "I64",
+          "value": "Do Not Prompt at Runtime"
+        },
+        {
+          "op": "inject",
+          "cell": "J64",
+          "value": "Do Not Include in Subtitle"
+        },
+        {
+          "op": "merge",
+          "range": "E8:H13"
+        }
+      ]
+    },
+    "Calculated Fields": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.1,
+        "B": 25.3,
+        "C": 28.4,
+        "D": 20.3,
+        "E": 63.6,
+        "F": 30.1,
+        "G": 27.7,
+        "H": 18.6,
+        "I": 62.3,
+        "J": 20.1,
+        "K": 89.3,
+        "L": 14.0,
+        "M": 36.6
+      },
+      "panel_merges": [
+        "B6:M6",
+        "B7:G7",
+        "B9:B13",
+        "C9:C13",
+        "D9:D13",
+        "E12:E13",
+        "E9:E11",
+        "F12:F13",
+        "F9:F11",
+        "G9:G13",
+        "H7:M7"
+      ],
+      "structure": []
+    },
+    "Custom Object": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.1,
+        "B": 5.0,
+        "C": 31.3,
+        "D": 40.1,
+        "E": 25.7,
+        "F": 21.3,
+        "G": 18.7,
+        "H": 24.0,
+        "I": 27.6,
+        "K": 8.7,
+        "L": 16.7,
+        "M": 56.6,
+        "N": 36.9,
+        "O": 9.1
+      },
+      "panel_merges": [
+        "B5:Q5",
+        "P3:U4"
+      ],
+      "structure": [
+        {
+          "op": "unmerge",
+          "range": "B6:C6",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "merge",
+          "range": "P3:U4"
+        }
+      ]
+    },
+    "DIS": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.1,
+        "B": 44.3,
+        "C": 48.0,
+        "D": 20.3,
+        "E": 63.6,
+        "F": 33.1,
+        "G": 38.7,
+        "H": 33.9,
+        "I": 33.3,
+        "J": 33.9,
+        "K": 33.3
+      },
+      "panel_merges": [
+        "E7:H11"
+      ],
+      "structure": [
+        {
+          "op": "merge",
+          "range": "E7:H11"
+        }
+      ]
+    },
+    "Mappings - CC": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.1,
+        "B": 20.7,
+        "C": 25.0,
+        "D": 24.4,
+        "E": 55.7,
+        "F": 24.4,
+        "G": 47.1,
+        "H": 9.1
+      },
+      "panel_merges": [
+        "I6:O23"
+      ],
+      "structure": [
+        {
+          "op": "merge",
+          "range": "I6:O23"
+        }
+      ]
+    },
+    "Mappings": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.9,
+        "B": 14.0,
+        "C": 26.7,
+        "D": 23.6,
+        "E": 22.6,
+        "F": 36.3,
+        "G": 41.3,
+        "H": 92.7,
+        "I": 9.1
+      },
+      "panel_merges": [],
+      "structure": []
+    },
+    "Flow": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.9,
+        "B": 9.1
+      },
+      "panel_merges": [
+        "B7:P7",
+        "B9:Q9",
+        "Q7:AC7"
+      ],
+      "structure": [
+        {
+          "op": "unmerge",
+          "range": "B21:Q21",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "unmerge",
+          "range": "B96:Q96",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "move",
+          "from": "B21",
+          "to": "B9"
+        },
+        {
+          "op": "move",
+          "from": "B96",
+          "to": "B84"
+        },
+        {
+          "op": "merge",
+          "range": "B9:Q9"
+        },
+        {
+          "op": "merge",
+          "range": "B84:Q84"
+        }
+      ]
+    },
+    "Examples": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.9,
+        "B": 9.7,
+        "C": 34.4,
+        "D": 60.6,
+        "E": 20.1,
+        "F": 9.1
+      },
+      "panel_merges": [
+        "B7:L7",
+        "F10:T10",
+        "F11:T11",
+        "F12:T12",
+        "F13:T13",
+        "F14:T14"
+      ],
+      "structure": []
+    },
+    "Unit Testing": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.9,
+        "B": 13.1,
+        "C": 22.7,
+        "D": 22.7,
+        "E": 53.0,
+        "F": 81.9,
+        "G": 9.7,
+        "H": 15.6,
+        "I": 21.3,
+        "J": 9.1
+      },
+      "panel_merges": [
+        "B13:I13",
+        "B3:C3",
+        "B5:C5",
+        "F3:F4"
+      ],
+      "structure": [
+        {
+          "op": "unmerge",
+          "range": "F5:I5",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "merge",
+          "range": "B3:C3"
+        }
+      ]
+    },
+    "Open Issues": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.9,
+        "B": 9.7,
+        "C": 12.6,
+        "D": 8.6,
+        "E": 20.4,
+        "F": 92.7,
+        "H": 11.3,
+        "J": 16.7,
+        "K": 9.1
+      },
+      "panel_merges": [
+        "B5:J5"
+      ],
+      "structure": [
+        {
+          "op": "unmerge",
+          "range": "B5:Q6",
+          "reason": "clear template merges the author removed here"
+        },
+        {
+          "op": "merge",
+          "range": "B5:J5"
+        }
+      ]
+    },
+    "Knowledge": {
+      "source": "calibrated from INTXXXX_Payroll_Input_Inbound_O4I_Template_Design_Document_v0.3_josh_upds.xlsm",
+      "widths": {
+        "A": 4.9,
+        "B": 14.0,
+        "C": 15.9,
+        "D": 51.1,
+        "E": 136.6,
+        "F": 9.1
+      },
+      "panel_merges": [
+        "B5:E5",
+        "B6:E6"
+      ],
+      "structure": []
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "Workday Delivery Copilot",
+  "description": "Your team's Workday delivery method, on tap. Estimates, discovery, design documents, Extend and integration build guidance, test scenarios, deployment and cutover plans, status reports, client messages and training material - each produced the way the practice's skill suite says to, with its quality check. It drafts and plans; live tenant work is handed back to you as exact steps.",
+  "conversation_starters": [
+    {"title": "Where do I start?", "text": "I am new to this project. Walk me through what to do next."},
+    {"title": "Estimate", "text": "Estimate the level of effort for a Workday Extend app. I will describe the scope."},
+    {"title": "Discovery prep", "text": "What should I ask the client in the first discovery session for a new integration?"},
+    {"title": "Design review", "text": "Review my design document outline and tell me what is missing before sign-off."},
+    {"title": "Pick an integration type", "text": "Should this be an EIB, a Core Connector, Studio or an Orchestrate flow? Here is the requirement."},
+    {"title": "Test scenarios", "text": "Derive unit test scenarios for this feature, including error paths."},
+    {"title": "Defect or change request?", "text": "Help me decide whether this UAT finding is a defect or a change request."},
+    {"title": "Go-live readiness", "text": "What gates and documents do we need before production approval and cutover?"},
+    {"title": "Weekly status", "text": "Draft this week's status report and RAID updates from my notes."},
+    {"title": "Client email", "text": "Draft a decision-needed email to the client about an open design item."},
+    {"title": "Meeting notes", "text": "Turn this meeting transcript into decisions, answers and action items."},
+    {"title": "Login error", "text": "I am getting an invalid_grant error connecting to the tenant. What do I check?"}
+  ]
+}

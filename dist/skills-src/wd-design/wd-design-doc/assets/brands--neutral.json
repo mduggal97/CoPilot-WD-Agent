@@ -1,0 +1,99 @@
+{
+  "name": "Neutral",
+  "slug": "neutral",
+  "is_default": true,
+  "_comment": [
+    "DEFAULT brand profile. Used whenever a project does not supply its own branding.",
+    "A neutral slate-and-grey palette, the system font pair, and NO wordmark, so a document never",
+    "carries any firm's identity by accident. For a client's own look, copy _example-customer.json.",
+    "Contrast (WCAG AA needs 4.5:1 for body text): band_text on band 14.5:1, header_text on",
+    "header_fill 14.3:1, body_text on white 14.7:1."
+  ],
+  "palette": {
+    "band": "1F2A37",
+    "band_text": "FFFFFF",
+    "accent_dark": "111827",
+    "header_fill": "E5E7EB",
+    "header_text": "111827",
+    "body_text": "1F2937",
+    "rule": "9CA3AF",
+    "masthead": "111827"
+  },
+  "fonts": {
+    "system": {
+      "head": "Aptos Display",
+      "body": "Tahoma"
+    },
+    "brand": {
+      "head": "Aptos Display",
+      "body": "Tahoma"
+    },
+    "_comment": "Both pairs are the system pair: they ship on every machine, so a client who opens and edits the file sees what we saw. A client profile may set a different 'brand' pair."
+  },
+  "type_scale": {
+    "title": 24,
+    "section": 12,
+    "subsection": 11,
+    "head": 10,
+    "body": 10
+  },
+  "_type_scale_comment": [
+    "THREE heading levels, distinguished by SIZE, not by inventing more colours:",
+    "  section    12pt  white on band          (largest)",
+    "  subsection 11pt  on the HEADER fill     (medium) - shares the column-header fill on purpose,",
+    "                                          so a sub-section reads as attached to the columns",
+    "                                          beneath it instead of floating in the table",
+    "  head       10pt  column headings        (smallest)",
+    "An earlier version gave sub-sections band-colour text with no fill and only a bottom rule. On a",
+    "tab with several stacked tables per section (WD Solution - O4I) that made 'CSV Format' look",
+    "like it was floating loose in the table above it rather than labelling the columns below."
+  ],
+  "logo": null,
+  "_logo_comment": "No wordmark. The styler then leaves any picture already in the workbook exactly as it is (no resize, no re-anchor) and styles each tab title in place. A client profile sets asset, ratio and width_pt.",
+  "conventions": {
+    "open_item_fill": "FFFF00",
+    "_comment": "open_item_fill is a WORKING convention, not branding: yellow means 'missing info / needs follow-up'. Never restyle it, whatever the brand. Same for semantic status colours driven by conditional formatting (RAG scales, test-status rules) - those carry meaning."
+  },
+  "rhythm": {
+    "body_from": "table_worst",
+    "band": 1.3,
+    "header": 1.0,
+    "subsection": 0.7,
+    "_comment": [
+      "One body height per TABLE (the worst row in that table), then structural rows as RATIOS of",
+      "it: band 1.3, header 1.0, sub-section 0.7. Ratios so they self-scale with the type scale.",
+      "SOURCE: hand-measured off the author's cleaned copy of the reference IDD, where a File table",
+      "body of 41.2pt sat under a 54.0 band (1.31), a 41.2 header (1.00) and a 28.5 sub-section",
+      "(0.69). NOT taken from xlsx_calibrate.py: its rhythm pass reported band 0.55 / header 0.58 /",
+      "subsection null, which is wrong — it associates a band with a table by 'nearest band above',",
+      "and body heights across the book range 15-55pt so the mode is not a stable base. Fix that",
+      "measurement before trusting calibrated rhythm values.",
+      "Uniform-to-worst is only safe AFTER col_roles has fixed the widths — otherwise one starved",
+      "prose column forces every row in the table to its height."
+    ]
+  },
+  "col_roles": {
+    "prose": 3.41,
+    "name": 1.03,
+    "label": 1.0,
+    "flag": 0.55,
+    "_comment": [
+      "Width weight by column ROLE, relative to a label column. CALIBRATED by xlsx_calibrate.py",
+      "from the author's cleaned copy: prose median 75.0pt, label 22.0, name 22.7, flag 12.1.",
+      "Role comes from the header text (Notes/Description/Purpose/Logic -> prose; Required/Status/",
+      "Enabled/Date -> flag; Name/Field/Type/Value -> name; else label). Measured content length is",
+      "a tiebreaker WITHIN a role, not the whole allocation — minimising the worst column forced",
+      "short-label columns toward parity with prose columns, which is why Requirements' empty",
+      "'Notes' column collapsed to 9.1 when the author had set it to 50.6."
+    ]
+  },
+  "tab_treatment": {
+    "_comment": [
+      "No per-tab panel treatments. 'panel' (one header-fill block behind a prose-only tab's content)",
+      "was evaluated for READ ME and DECLINED 2026-08-10: the contrast gate already yields a clean,",
+      "readable READ ME on white that matches the author's hand-cleaned geometry within rounding, and a",
+      "fill behind body prose re-introduces the contrast risk the gate exists to remove. Keep prose-only",
+      "tabs on white. Re-add a slug->'panel' entry here only if a future brand explicitly wants it."
+    ]
+  }
+}

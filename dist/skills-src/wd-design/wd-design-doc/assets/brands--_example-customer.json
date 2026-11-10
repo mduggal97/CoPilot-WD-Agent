@@ -1,0 +1,57 @@
+{
+  "name": "EXAMPLE Customer Brand",
+  "slug": "example-customer",
+  "is_default": false,
+  "_comment": [
+    "COPY THIS FILE when a client asks us to produce their design docs in THEIR branding.",
+    "Name it <client-slug>.json in this folder, then pass --brand-profile <client-slug>.",
+    "",
+    "The quality gates do NOT change when the brand changes. Structure, row heights, wrap,",
+    "clipping, title placement, single type scale and single border neutral are all checked the",
+    "same way - only the colours, fonts and logo asset come from here. That is the whole point of",
+    "keeping brand in a profile: a client-branded document must come out as cleanly formatted as",
+    "one in the neutral default.",
+    "",
+    "WHAT TO ASK THE CLIENT FOR:",
+    "  1. Their brand guide (palette hex values and the approved type pairing).",
+    "  2. A PNG or SVG of the wordmark cleared for document use, ideally >= 300px wide, on a",
+    "     TRANSPARENT background, in the variant approved for light backgrounds.",
+    "  3. The wordmark's locked aspect ratio, or a file we can measure it from.",
+    "  4. Whether their fonts are licensed for our machines. If not, pick the closest pair that",
+    "     ships with Office and say so in the doc's Version Control entry - a document that",
+    "     renders with substituted fonts on the client's machine is worse than one that uses",
+    "     system fonts by design.",
+    "",
+    "CONTRAST: band_text must be legible on band, and header_text on header_fill. Check it - a",
+    "dark-on-dark header is the most common failure when swapping in a client palette."
+  ],
+
+  "palette": {
+    "band":        "123456",
+    "band_text":   "FFFFFF",
+    "accent_dark": "0A1D2E",
+    "header_fill": "E8ECEF",
+    "header_text": "0A1D2E",
+    "body_text":   "222222",
+    "rule":        "9AA0A6",
+    "masthead":    "0A1D2E"
+  },
+
+  "fonts": {
+    "system": { "head": "Aptos Display", "body": "Tahoma" },
+    "brand":  { "head": "CLIENT HEAD FONT", "body": "CLIENT BODY FONT" }
+  },
+
+  "type_scale": { "title": 24, "head": 10, "body": 10 },
+
+  "logo": {
+    "asset": "client_wordmark.png",
+    "search_roots": ["assets/logos/png", "assets"],
+    "ratio": 4.0,
+    "width_pt": 124.0
+  },
+
+  "conventions": {
+    "open_item_fill": "FFFF00"
+  }
+}

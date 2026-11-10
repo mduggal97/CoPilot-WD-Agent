@@ -1,0 +1,10 @@
+Workday ID #,Integration Name,Scope,Direction,Vendor/External Systems,Workstream,Integration Type,Vendor Type,priority,Workday Domain Area,Has PII Data?,frequency,notes
+INT001,Payroll Export to ADP,In Scope,Outbound,ADP,HCM,Core Connector,External,P1,Payroll,Yes,Daily,Gross-to-net payroll file
+INT002,Benefits Enrollment Feed,In Scope,Outbound,Fidelity,HCM,EIB,External,P2,Benefits,Yes,Weekly,Deductions and elections
+INT003,Recruiting Candidate Sync,In Scope,Bidirectional,LinkedIn,HCM,Studio,External,P3,Recruiting,No,Hourly,Job posting and applicant sync
+INT004,Bank Payment File,In Scope,Outbound,JP Morgan,Financials,Studio,External,P1,Payments,Yes,Daily,ACH and positive pay
+INT005,Supplier Invoice Import,In Scope,Inbound,Coupa,Financials,EIB,Third-Party,P2,Accounts Payable,No,Daily,AP invoice load
+INT006,GL Journal to Data Lake,In Scope,Outbound,Snowflake,Financials,RaaS,Internal,P3,General Ledger,No,Nightly,Reporting extract
+INT007,Purchase Order to Vendor,In Scope,Outbound,Amazon Business,SCM,API,External,P2,Procurement,No,Real-time,PunchOut PO dispatch
+INT008,Asset Sync Boomerang,In Scope,Boomerang,Workday,SCM,Orchestrate,Internal,P3,Assets,No,Daily,Workday-to-Workday asset reconciliation
+INT009,Deprecated Timekeeping Feed,Out of Scope,Inbound,Kronos,HCM,EIB,External,P3,Time Tracking,Yes,Daily,Legacy - being retired

@@ -1,0 +1,3 @@
+# Keep LF line endings everywhere: character-count limits depend on them.
+* text=auto eol=lf
+*.zip binary

@@ -1,0 +1,140 @@
+{
+  "name": "Integration Design Document (16/22-tab IDD)",
+  "slug": "idd",
+  "_comment": [
+    "A TEMPLATE profile answers one question: which of this template's existing fills mean",
+    "'section band', which mean 'sub-section label', and which mean 'table header'?",
+    "",
+    "That is a property of the SOURCE TEMPLATE, not of the brand - which is why it lives here and",
+    "not in brands/. Swap the brand and this file still applies; open a DIFFERENT template and you",
+    "need a new one of these. Generate a starter with:",
+    "",
+    "    python scripts/xlsx_brand_style.py <workbook> --discover-roles",
+    "",
+    "then read the census, assign each fill to a role, and save it as templates/<slug>.json.",
+    "",
+    "WHY MAP INSTEAD OF INFER: an earlier version guessed structure from shape ('a row with 1-2",
+    "populated cells is a band') and turned the Overview tab - a label/value form, not a table -",
+    "into a wall of colour. Templates already encode their hierarchy in their fills. Reinterpret",
+    "those; never invent a band where the template has none.",
+    "",
+    "Fill keys are either [\"rgb\", \"AARRGGBB\"] or [\"theme\", index, tint]."
+  ],
+  "roles": {
+    "band": [
+      [
+        "rgb",
+        "FFF1BE48"
+      ],
+      [
+        "theme",
+        2,
+        0.0
+      ],
+      [
+        "theme",
+        5,
+        0.0
+      ],
+      [
+        "rgb",
+        "FF5D013A"
+      ],
+      [
+        "rgb",
+        "FFD9D9D9"
+      ]
+    ],
+    "subsection": [
+      [
+        "theme",
+        0,
+        -0.15
+      ],
+      [
+        "theme",
+        0,
+        -0.25
+      ]
+    ],
+    "header": [
+      [
+        "theme",
+        0,
+        -0.05
+      ],
+      [
+        "rgb",
+        "FFE3E1E4"
+      ],
+      [
+        "rgb",
+        "FFE3E1D4"
+      ],
+      [
+        "rgb",
+        "FFF6F7F8"
+      ],
+      [
+        "rgb",
+        "FF00558C"
+      ],
+      [
+        "rgb",
+        "FFC1C6C8"
+      ],
+      [
+        "rgb",
+        "FFF2F2F2"
+      ]
+    ]
+  },
+  "_roles_comment": [
+    "The two last entries are the REGENERATED templates' placeholders: build_idd_structure.py and",
+    "build_extend_design_doc.py paint section bands FFD9D9D9 and column headers FFF2F2F2. Without",
+    "them a regenerated doc keeps grey bands, and xlsx_normalize_layout.py - which finds tables by",
+    "the brand's band and header fills - draws no table borders at all.",
+    "",
+    "The builders' title strip FF404040 is deliberately in NO role. The styler finds the tab title",
+    "by POSITION (first text in rows 1-4), not by fill, and the contrast gate clears the dark strip",
+    "to paper on every run (FF404040 is under 2.5:1 against any body text that passes WCAG AA).",
+    "Mapping it to band was tested on 2026-10-16: the titles came out identical, and the title row",
+    "took the first-band-row prose exemption, so IDD Open Issues!B5 dropped from band to italic note.",
+    "",
+    "scripts/check_profiles.py fails if a builder placeholder is unmapped or the title strip gains a role."
+  ],
+  "layout": {
+    "masthead_row": 1,
+    "masthead_pt": 7.0,
+    "logo_row": 3,
+    "logo_row_pt": 42.0,
+    "gutter_col_width": 4.1,
+    "title_gap_pt": 14.0,
+    "header_min_pt": 16.5,
+    "_comment": "logo_row_pt must exceed the wordmark height (width_pt / ratio) or the logo overflows into the rows below. header_min_pt must clear the descenders of the body font at head size - 13.5pt sliced the tails off 'Length', 'Mapping' and 'Align' at 10pt Tahoma."
+  },
+  "skip_sheets": [],
+  "_skip_comment": "READ ME used to be skipped, which left it in Times New Roman at three sizes while every other tab was branded. It has no tables, so the normal machinery finds no bands or headers and simply applies the brand type and the white canvas - which is what it needs.",
+  "notes": [
+    "Tab titles are positioned by LEADING SPACES inside the same cell as the logo, calibrated for",
+    "the template's original font. Never inherit those counts - re-derive them from the measured",
+    "space width of the font actually in use.",
+    "Some tabs are hidden by the Integration-Type macro. Hidden is not gone: they must be rebranded",
+    "too, or switching integration type surfaces stale branding."
+  ],
+  "identity_cells": [
+    "Overview!J8",
+    "Overview!J9"
+  ],
+  "_identity_comment": [
+    "Where a document of this template keeps its own identity: Overview!J8 is the Integration ID and",
+    "Overview!J9 the Integration Name (references/idd-template.md - the same two cells the master's",
+    "ISU/ISSG formulas build from). A layout calibration records their values when it is taken and",
+    "applies only to a workbook that holds the same values (scripts/xlsx_layout_match.py).",
+    "",
+    "This profile carries NO tab_layouts on purpose. A calibration describes ONE document, not the",
+    "template family: it once lived here, and every regenerated IDD and Extend doc received the",
+    "reference's widths, merges and text. Calibrations live in templates/layouts/<slug>.json;",
+    "check_profiles.py fails if a template profile carries one again."
+  ]
+}

@@ -1,0 +1,9 @@
+# Private name list: real client, engagement and author names. Never commit.
+*.local.json
+
+# Python and OS noise
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+desktop.ini
