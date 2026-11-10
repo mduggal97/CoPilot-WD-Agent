@@ -95,7 +95,7 @@ agentic AI.
   - it may absorb the use case natively. Re-verify per release (release-impact.md has the GA tracker row).
   **Sana is ALSO the third-party-connector surface that is live today (2026-09-11):** calling third-party
   tools THROUGH Workday is a **Sana Enterprise** feature - admin-managed third-party connectors (~18 shipped
-  at GA: Slack, Jira, Salesforce, ServiceNow, SharePoint, Google Workspace, Zoom, etc. - REPORTED) plus
+  at GA: Slack, Jira, Salesforce, ServiceNow, Google Workspace, Zoom, etc. - REPORTED) plus
   custom MCP connectors - NOT an ASOR/MCP-Explorer concept and distinct from the Pipedream Copilot knowledge
   connectors below. When a client asks "can a Workday agent reach system X today," the honest answer is:
   via Sana Enterprise connectors (GA) or your own Extend orchestration egress; the Pipedream agent-action
@@ -159,7 +159,7 @@ model component as if an agent will call it - it is discoverable and callable vi
 
 **Pipedream status check (2026-09-11).** The FIRST live Pipedream surface is NOT agent actions and NOT
 orchestration flow steps: it is **"Connectors in Developer Copilot for Orchestrate"** - 8 read-only
-KNOWLEDGE connectors (Google Drive, Gmail, Jira, GitHub, Outlook, SharePoint, Confluence, Linear) that
+KNOWLEDGE connectors (Google Drive, Gmail, Jira, GitHub, Outlook, Confluence, Linear) that
 feed the build-time Copilot's context. **Extend Pro customers, North America regions only.** Security
 model (client-conversation-ready, from the official doc): auth is Pipedream-managed via the **official
 shared Pipedream OAuth client per provider** (shared across the whole Pipedream platform, NOT unique to

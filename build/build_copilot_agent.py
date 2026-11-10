@@ -423,7 +423,10 @@ def main() -> int:
     suite = Path(args.suite)
     cfg = json.loads((HERE / "groups.json").read_text(encoding="utf-8"))
     groups = cfg["groups"]
-    EXCLUDED[:] = cfg["excluded"]
+    scrubbed = [t.lower() for t in cfg.get("scrubbed_terms", [])]
+    # A scrubbed skill is removed from every guide, so nothing points to it and the
+    # "Not in this agent" line has no reason to name it.
+    EXCLUDED[:] = [s for s in cfg["excluded"] if s.lower() not in scrubbed]
 
     checks: list[tuple[str, bool, str]] = []  # (name, passed, detail)
     log = {"skipped": [], "scripts_excluded": [], "flattened": [], "redactions": []}
@@ -587,6 +590,20 @@ def main() -> int:
         sweep_scope = "author paths ONLY - name sweep OFF"
     checks.append((f"Sanitize sweep: no blocking hits ({sweep_scope})", not blocking, f"{len(blocking)} hits"))
 
+    # Scrubbed terms: words the package must not contain at all (groups.json).
+    scrub_hits = []
+    for f in sorted(list(src_root.rglob("*")) + [instr, profile]):
+        if not f.is_file() or f.suffix.lower() not in TEXT_EXT:
+            continue
+        rel = f.relative_to(src_root).as_posix() if src_root in f.parents else f.name
+        for n, line in enumerate(f.read_text(encoding="utf-8", errors="replace").lower().splitlines(), 1):
+            for term in scrubbed:
+                if term in line:
+                    scrub_hits.append(f"{rel} line {n}")
+    # The label gives a count, not the terms: this report ships in the repo too.
+    checks.append((f"No scrubbed term in the package ({len(scrubbed)} listed in groups.json)", not scrub_hits,
+                   "; ".join(scrub_hits[:5]) + (f" (+{len(scrub_hits) - 5} more)" if len(scrub_hits) > 5 else "") or "0 hits"))
+
     # 6. Report -------------------------------------------------------------------------
     failed = [c for c in checks if not c[1]]
     r = ["# Build report", "",
@@ -618,8 +635,9 @@ def main() -> int:
           "Not shipped in v1. See the README backlog, item 3.", ""]
     r += [f"- {s}" for s in log["scripts_excluded"]]
     r += ["", "## Skipped files", ""] + ([f"- {s}" for s in log["skipped"]] or ["- None."])
-    r += ["", f"## Engagement names genericized in the package ({len(log['redactions'])} files)", "",
-          "Any file listed here still carries an engagement name in the installed suite. Only the packaged copy was changed. Zero files means the suite is clean.", ""]
+    r += ["", f"## Wording replaced in the package ({len(log['redactions'])} files)", "",
+          "Each file listed here differs from the installed suite. Only the packaged copy was changed.",
+          "The replacements cover scrubbed terms, dev tenant aliases and, on the maintainer's machine, engagement names.", ""]
     r += [f"- {s}" for s in log["redactions"]] or ["- None."]
     r += ["", "## Renamed or flattened", "", "- Every member's `SKILL.md` is packaged as `GUIDE.md`."]
     r += [f"- {s}" for s in log["flattened"]]

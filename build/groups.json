@@ -48,11 +48,25 @@
   ],
   "_redactions_comment": "Applied in order to the PACKAGED copies only (regex -> replacement). GENERIC patterns only in this file. Real client, engagement and author names never go here: they live in build/private-names.local.json, which is git-ignored and applied first.",
   "redactions": [
-    [
-      "[A-Za-z]+_wcpdev[0-9]*",
-      "a dev tenant"
-    ]
+    ["[A-Za-z]+_wcpdev[0-9]*", "a dev tenant"],
+
+    ["\\*\\*Report a problem with a skill / a gap\\*\\* -> wd-suite-feedback ; ", ""],
+    [" / found a suite problem / missing capability / a skill was wrong \\(\\*\\*wd-suite-feedback\\*\\*\\)", ""],
+    ["- Found a suite problem[^\\n]*\\*\\*wd-suite-feedback\\*\\*[^\\n]*\\n", ""],
+    ["\\| Suite feedback[^\\n]*\\*\\*wd-suite-feedback\\*\\* \\|\\n", ""],
+    ["\\| wd-suite-feedback \\|[^\\n]*\\n", ""],
+    ["capture it via\\s+wd-suite-feedback so", "tell the suite maintainer so"],
+    ["suite maintainer \\(wd-suite-feedback\\)", "suite maintainer"],
+    ["\\*{0,2}wd-suite-feedback\\*{0,2}", "the suite maintainer"],
+
+    ["on SharePoint", "on a shared drive"],
+    ["SharePoint, ", ""],
+    ["SharePoint/", ""],
+    ["a SharePoint \"", "a shared \""],
+    ["SharePoint", "shared-drive"]
   ],
+  "_scrubbed_terms_comment": "Terms that must not appear anywhere in the package (case-insensitive). The redactions above remove today's mentions from the packaged copies; the build FAILS if a suite upgrade brings a new one, so add a redaction for it. An excluded skill listed here is also left out of the 'Not in this agent' line.",
+  "scrubbed_terms": ["sharepoint", "wd-suite-feedback"],
   "groups": [
     {
       "name": "wd-suite-router",

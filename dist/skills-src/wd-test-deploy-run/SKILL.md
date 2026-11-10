@@ -131,4 +131,4 @@ The guides were written for Claude Code, which runs on the user's own machine. T
 - **wd-project-delivery**: wd-pm, wd-smartsheet, wd-comms, wd-kt, wd-change-adoption, wd-demo
 - **tool-and-product-build**: app-architecture, app-hosting, app-agentic, app-harness, saas-integration, product-strategy, product-operations
 
-Not in this agent: `bow-sales-enablement`, `product-gtm`, `wd-suite-feedback`. If a guide points to one of these, say that content is not included.
+Not in this agent: `bow-sales-enablement`, `product-gtm`. If a guide points to one of these, say that content is not included.

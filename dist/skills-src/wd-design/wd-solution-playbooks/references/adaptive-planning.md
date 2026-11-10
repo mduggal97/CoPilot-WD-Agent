@@ -202,4 +202,4 @@ Functional-literacy footer: there is NO wd-discovery functional file for Adaptiv
 EPM (functional-financials.md and workday-functional-skus.md do not cover it) - a known
 LITERACY GAP. Until one exists, ground planning/EPM concepts (what a version / level /
 dimension / cube-vs-modeled sheet IS) directly from Workday Adaptive product docs, and flag
-the gap to the suite maintainer (wd-suite-feedback).
+the gap to the suite maintainer.

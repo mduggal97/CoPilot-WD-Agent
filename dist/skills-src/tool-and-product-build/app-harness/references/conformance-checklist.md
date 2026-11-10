@@ -273,8 +273,7 @@ for the app-* family and a per-tool requirement until then:
   citations or grounding on factual output; handled per-tool. Candidate for
   app-agentic if a common pattern emerges.
 
-If a tool's use of the family closes one of these locally, capture it via
-wd-suite-feedback so the family reference catches up.
+If a tool's use of the family closes one of these locally, tell the suite maintainer so the family reference catches up.
 
 ---
 

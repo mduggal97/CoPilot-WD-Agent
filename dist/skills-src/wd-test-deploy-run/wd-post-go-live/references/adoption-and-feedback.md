@@ -32,7 +32,7 @@ this reference defines how to measure them:
   exit (not invented on go/no-go day); "trained" = attended a session or completed
   the job aid, per the KT tracking table (**wd-kt** `references/kt-sessions.md`).
 - **Job aid distributed** - to the full user population, via a channel with receipts
-  (not "it's on SharePoint somewhere").
+  (not "it's on a shared drive somewhere").
 - **Help path verified end-to-end by a real user** - one actual end user (not a
   consultant, not the champion) raises a test question through the published help
   path and gets an answer within the stated SLA. This one check catches dead

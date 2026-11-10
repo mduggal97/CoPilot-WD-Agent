@@ -59,7 +59,6 @@ local machine or a live tenant to do its core job.
 | wd-demo | Full | demo-script authoring works; running a live demo hits the tenant -> Claude Code |
 | wd-solution-playbooks | Full | - (reference content) |
 | wd-test-execution | Partial | scenario walkthroughs/evidence docs draft anywhere; **live in-tenant execution + the browser-driven runs + validate_output_file.py on local files = Claude Code** |
-| wd-suite-feedback | Partial | record drafting works anywhere; the scripts (log/triage/pull/autosync) need local Python + the OneDrive-synced folder -> Claude Code |
 | wd-tenant-config | Claude Code | drives the **Workday tenant UI via the browser pane** - no browser pane / live tenant in the sandbox; config PLANS still draft anywhere |
 | wd-smartsheet | Claude Code | reads/writes a **live** Smartsheet via REST + local keychain token - on claude.ai it can DRAFT the row/update, but writing needs Claude Code (or an enabled Smartsheet MCP connector) |
 | wd-folder-hygiene | Claude Code | tidies a **local project folder** - there is no local folder in the claude.ai sandbox |

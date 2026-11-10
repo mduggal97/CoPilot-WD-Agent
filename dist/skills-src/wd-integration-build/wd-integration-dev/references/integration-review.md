@@ -30,7 +30,7 @@ the wd-extend-dev skill.
 - **Only fail where content is genuinely absent, incorrect, or incomplete.** A documented item that
   meets the minimum bar is a **Pass**, not a Partial. Reserve Partial for "present but thin."
 - **Do not flag missing approval dates** (Design/Build approval is often not captured at review time).
-- **Do not fail on what a text export cannot show.** Yellow-highlight removal, SharePoint folder
+- **Do not fail on what a text export cannot show.** Yellow-highlight removal, shared-drive folder
   contents, and other visual/environment facts **cannot be verified from a text or CSV extraction** -
   mark them N-A with a note rather than failing them. (This "auto-N-A the unverifiable" rule is what
   keeps an automated or text-only review honest; a human reviewing the live workbook re-enables them.)
@@ -40,7 +40,7 @@ the wd-extend-dev skill.
 
 ## Automatic N-A items (mark without evaluating)
 
-- Anything unverifiable from a text/CSV export (highlighting removal, SharePoint artifact location).
+- Anything unverifiable from a text/CSV export (highlighting removal, shared-drive artifact location).
 - Build-Approval sign-off at IDD stage (not expected yet).
 - File-output items (filenames, date stamps on output) for an **API-type integration with no file output**.
 - Outbound-only items when the integration is **Inbound**, and inbound-only items when it is **Outbound**.
@@ -53,7 +53,7 @@ the wd-extend-dev skill.
 |---|---|---|---|
 | 1 | Artifacts | Design-doc name follows the naming standard | matches integration-naming.md pattern |
 | 2 | Artifacts | All technical artifacts follow naming conventions; **the tool type appears in the name** (EIB/O4I/Studio/PECI/PICOF/CC...) | Fail + quote name if the tool type is missing |
-| 3 | Artifacts | Artifacts in the INT folder; no keys/passwords on SharePoint | N-A from text export (verify live) |
+| 3 | Artifacts | Artifacts in the INT folder; no keys/passwords on a shared drive | N-A from text export (verify live) |
 | 4 | Questions | Status set to Answered for resolved questions | "Have to ask" with a blank answer = Pass; Fail only if an answer is populated but status still says "Have to ask" |
 | 5 | Questions | Yellow highlighting removed from resolved columns | N-A from text export |
 | 6 | Questions | File names include a date / datetime stamp | N-A if API-type, no file output |
@@ -95,7 +95,7 @@ default integration notification configured correctly (standard subject/body cal
 **Studio / O4I (18-20):** descriptive component names (flag defaults like `Component_1`, `Step_2`);
 Cloud Log used instead of CSV; unused attributes/maps/components removed.
 
-**Version control (21-22):** SharePoint/Git URL recorded in the IDD Overview links; code in source
+**Version control (21-22):** Git URL recorded in the IDD Overview links; code in source
 control updated to the latest version.
 
 **Integration attributes (23-25):** web-service version documented; log-file names as an integration

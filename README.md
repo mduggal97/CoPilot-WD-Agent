@@ -9,7 +9,7 @@ The Workday practice skill suite, repackaged as one Microsoft 365 Copilot agent.
 - **What it cannot do** - run `wdcli`, touch a live tenant or Smartsheet, drive a browser, or run the suite's scripts.
   - It drafts and plans. It hands live steps back under "Finish this on your machine".
 - **How it is built** - `build/build_copilot_agent.py` regenerates everything in `dist/` from the installed suite.
-- **Status** - package built and all 22 build checks pass. **Not yet installed or tested inside Copilot.**
+- **Status** - package built and all 23 build checks pass. **Not yet installed or tested inside Copilot.**
 
 ## What is in this folder
 
@@ -172,13 +172,23 @@ python -I -B build/build_copilot_agent.py --update-name-hashes
 
 4. **Rebuild, then commit `build/name-hashes.json`.** The build fails if the two files are out of step.
 
-## What the build checks (22 checks)
+## Scrubbed terms
+
+Some words must not appear anywhere in the package. The list is `scrubbed_terms` in `build/groups.json`.
+
+- **The build rewrites today's mentions** in the packaged copies, using the `redactions` list in the same file.
+- **The installed suite is not touched.** Only the copies inside `dist/` change.
+- **The build fails on a new mention.** A suite upgrade can bring one. Add a `redactions` pair for it, then rebuild.
+- **`dist/BUILD_REPORT.md` lists every file that was reworded.**
+
+## What the build checks (23 checks)
 
 - **Scope** - all 35 in-scope skills packaged, none twice, no excluded skill present.
 - **Platform limits** - 8 skills, each `SKILL.md` under 20,000 characters, 350 files total, folder depth, zip and file sizes, `SKILL.md` at the zip root.
 - **Agent text** - instructions under 8,000 characters and naming all 8 skills, name, description, 12 starters.
 - **Links** - every file path a `SKILL.md` lists exists in the package.
 - **Sanitize sweep** - blocks on author paths and listed names. Lists emails, long IDs, tenant URLs and phone numbers for review.
+- **Scrubbed terms** - no listed term appears in any packaged file or in the agent text.
 - **Name check health** - the fingerprint file is present, and it matches the maintainer's private list.
 
 Also run separately on the unzipped package: `~/.claude/guards/firm_name_guard.py`. Result on 2026-11-10: clean.
@@ -188,7 +198,7 @@ Also run separately on the unzipped package: `~/.claude/guards/firm_name_guard.p
 - **Not tested in Copilot yet.** The package meets every documented limit. Whether Copilot routes well across 8 large skills is unproven until the acceptance tests run.
 - **Scripts are held back.** 75 helper scripts are not shipped. With them the package would break the 350-file cap, and the Copilot sandbox has no network and cannot install packages.
 - **Engagement names were found and removed.** The sweep found a client app name, a vendor name and a tenant alias in 7 suite files. They were replaced at the source on 2026-11-10 with "a client app", "the vendor" and "a dev tenant".
-  - The build still applies a replacement map as a safety net. The report shows 0 replacements when the suite is clean.
+  - The build still applies a name replacement map as a safety net. It made 0 name replacements on the last build.
   - The engagement's own deployment skill keeps its names. It is not part of this package.
 - **The real names are not in this repo.** Only their fingerprints are. See "The name check" above.
   - The real names live in `build/private-names.local.json`, which is git-ignored.

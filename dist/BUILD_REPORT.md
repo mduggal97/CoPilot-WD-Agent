@@ -1,6 +1,6 @@
 # Build report
 
-**Result: PASS** - 22 of 22 checks passed.
+**Result: PASS** - 23 of 23 checks passed.
 
 Source suite: `v2.3 (2026-09-11)`. Limits checked against Microsoft Learn, 2026-11-10.
 
@@ -21,7 +21,7 @@ Source suite: `v2.3 (2026-09-11)`. Limits checked against Microsoft Learn, 2026-
 - **PASS** - Every in-scope suite skill is packaged
   - 35 of 35
 - **PASS** - Each SKILL.md under 20,000 characters
-  - wd-suite-router=12,633; wd-scope-and-contract=8,941; wd-design=11,336; wd-extend-build=10,070; wd-integration-build=5,512; wd-test-deploy-run=13,041; wd-project-delivery=11,077; tool-and-product-build=15,729
+  - wd-suite-router=12,612; wd-scope-and-contract=8,920; wd-design=11,315; wd-extend-build=10,049; wd-integration-build=5,491; wd-test-deploy-run=13,020; wd-project-delivery=11,056; tool-and-product-build=15,708
 - **PASS** - At most 8 skills
   - 8 skills
 - **PASS** - At most 350 files across all skills
@@ -50,17 +50,19 @@ Source suite: `v2.3 (2026-09-11)`. Limits checked against Microsoft Learn, 2026-
   - 12
 - **PASS** - Sanitize sweep: no blocking hits (author paths; names by private list and by fingerprint)
   - 0 hits
+- **PASS** - No scrubbed term in the package (2 listed in groups.json)
+  - 0 hits
 
 ## The 8 skill packages
 
-- **wd-suite-router.zip** - 6 member skills, 32 files, 129 KB, SKILL.md 12,633 characters
-- **wd-scope-and-contract.zip** - 4 member skills, 29 files, 117 KB, SKILL.md 8,941 characters
-- **wd-design.zip** - 4 member skills, 46 files, 234 KB, SKILL.md 11,336 characters
-- **wd-extend-build.zip** - 2 member skills, 46 files, 336 KB, SKILL.md 10,070 characters
-- **wd-integration-build.zip** - 1 member skill, 13 files, 87 KB, SKILL.md 5,512 characters
-- **wd-test-deploy-run.zip** - 5 member skills, 49 files, 236 KB, SKILL.md 13,041 characters
-- **wd-project-delivery.zip** - 6 member skills, 38 files, 119 KB, SKILL.md 11,077 characters
-- **tool-and-product-build.zip** - 7 member skills, 54 files, 334 KB, SKILL.md 15,729 characters
+- **wd-suite-router.zip** - 6 member skills, 32 files, 129 KB, SKILL.md 12,612 characters
+- **wd-scope-and-contract.zip** - 4 member skills, 29 files, 117 KB, SKILL.md 8,920 characters
+- **wd-design.zip** - 4 member skills, 46 files, 234 KB, SKILL.md 11,315 characters
+- **wd-extend-build.zip** - 2 member skills, 46 files, 336 KB, SKILL.md 10,049 characters
+- **wd-integration-build.zip** - 1 member skill, 13 files, 87 KB, SKILL.md 5,491 characters
+- **wd-test-deploy-run.zip** - 5 member skills, 49 files, 236 KB, SKILL.md 13,020 characters
+- **wd-project-delivery.zip** - 6 member skills, 38 files, 119 KB, SKILL.md 11,056 characters
+- **tool-and-product-build.zip** - 7 member skills, 54 files, 334 KB, SKILL.md 15,708 characters
 
 ## Sanitize sweep - blocking hits
 
@@ -157,11 +159,20 @@ Not shipped in v1. See the README backlog, item 3.
 - wd-design-doc/assets/logos/png/_ASSETS_REMOVED.md (housekeeping file)
 - wd-extend-dev/scripts/__pycache__/pmd_preflight.cpython-312.pyc (housekeeping file)
 
-## Engagement names genericized in the package (0 files)
+## Wording replaced in the package (9 files)
 
-Any file listed here still carries an engagement name in the installed suite. Only the packaged copy was changed. Zero files means the suite is clean.
+Each file listed here differs from the installed suite. Only the packaged copy was changed.
+The replacements cover scrubbed terms, dev tenant aliases and, on the maintainer's machine, engagement names.
 
-- None.
+- wd-extend-lifecycle/references/platform-compatibility.md: 1 replacement
+- wd-extend-lifecycle/SKILL.md: 4 replacements
+- wd-solution-playbooks/references/adaptive-planning.md: 1 replacement
+- wd-extend-dev/references/custom-agents.md: 2 replacements
+- wd-integration-dev/references/integration-review.md: 4 replacements
+- wd-integration-dev/references/xslt3.md: 1 replacement
+- wd-post-go-live/references/adoption-and-feedback.md: 1 replacement
+- wd-comms/SKILL.md: 1 replacement
+- app-harness/references/conformance-checklist.md: 1 replacement
 
 ## Renamed or flattened
 

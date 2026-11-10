@@ -72,7 +72,7 @@ open it:
 - `[Resolved] Statement-load timeout fixed in build 14`
 
 **Teams posts are not emails.** Shorter - a headline line plus 3-5 bullets
-max. Link the artifact (SharePoint/Smartsheet/design doc) rather than
+max. Link the artifact (Smartsheet/design doc) rather than
 attaching files. @-mention only the owners of actions, never the whole
 channel or "the room". If it needs more than ~10 lines, it's an email.
 
