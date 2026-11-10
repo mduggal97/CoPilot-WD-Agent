@@ -1,6 +1,6 @@
 ---
 name: wd-suite-router
-description: "Front door for Workday practice work. Use when the user is starting something new, asks what to do next, which phase a project is in, which skill handles a task, or wants to be walked through a Workday Extend or integration project start to finish. Also owns the delivery quality gates, the kickoff checklist, the AI data-handling rules, full-program Workday deployment methodology (phases, roles, RACI, governance, configuration guides), practice operations (onboarding, certifications, staffing, utilization, partner program), project-folder structure and archiving rules, splitting work across sessions, and logging feedback about this skill suite."
+description: "Front door for Workday practice work. Use when the user is starting something new, asks what to do next, which phase a project is in, which skill handles a task, or wants to be walked through a Workday Extend or integration project start to finish. Also owns the delivery quality gates, the kickoff checklist, the AI data-handling rules, full-program Workday deployment methodology (phases, roles, RACI, governance, configuration guides), practice operations (onboarding, certifications, staffing, utilization, partner program), project-folder structure and archiving rules, and splitting work across sessions."
 ---
 
 # Suite router, methodology and practice operations
@@ -84,18 +84,6 @@ The guides were written for Claude Code, which runs on the user's own machine. T
 - `wd-practice-ops/references/reuse-and-asset-catalog.md` - Reusable-asset & IP catalog (build once, reuse many)
 - `wd-practice-ops/references/staffing-and-alliance.md` - Staffing, capacity & the Workday alliance relationship
 
-### wd-suite-feedback
-
-**Use for:** Capture and route feedback on the shared Workday Claude skill suite - report an issue, share a learning, propose an addition or an update to any skill, or ask a question, and file it as a GitHub Issue on the suite repo (primary channel) or a structured local file (offline fallback) the maintainer can triage. Use when the user says "log a skill-suite issue", "report a problem with a skill", "I learned something we should add", "suggest a change to <skill>", "skill feedback", "submit suite feedback", or when a skill was wrong / missing / hard to use and that should get back to the maintainer. Also carries the MAINTAINER mode: harvest everyone's feedback (GitHub Issues, or legacy feedback files) into a triage report grouped by target skill so the suite can be updated. This closes the shared-suite feedback-and-improvement loop.
-
-**Start here:** `wd-suite-feedback/GUIDE.md`
-
-**Reference files:**
-
-- `wd-suite-feedback/references/feedback-template.md` - Summary
-- `wd-suite-feedback/references/suite-health-playbook.md` - Suite-health playbook - diagnosing and fixing suite-LEVEL problems (maintainer)
-- `wd-suite-feedback/references/triage-mode.md` - Triage mode (the suite maintainer)
-
 ### session-orchestration
 
 **Use for:** Fork work out to other agents, sessions, and models to parallelize, and pick the RIGHT model for each piece - route up (stronger) or down (cheaper) by task. Cross-cutting: applies to ANY Claude Code work in either suite track. Use when work could run in parallel, a job reads across many files, or a subtask wants a different model or another session. TRIGGERS: "fork this", "parallelize", "run these in parallel", "fan out", "delegate to another agent/session", "spin up agents", "which model should I use", "use a cheaper model", "use a stronger model", "route up/down", "background this", "have another session do X", "run this on a schedule", "too much to do in one session". Answers four questions: should I fork, to WHAT mechanism (subagent, peer or cloud session, scheduled run, Workflow), which MODEL, and how to dispatch so the result is trustworthy. The build-loop use of model tiers is app-harness; this skill owns the GENERAL forking and model-routing decision.
@@ -122,7 +110,7 @@ The guides were written for Claude Code, which runs on the user's own machine. T
 
 ## Suite map (where every skill lives)
 
-- **wd-suite-router** (this skill): practice-lifecycle, wd-extend-lifecycle, wd-delivery-methodology, wd-practice-ops, wd-suite-feedback, session-orchestration, wd-folder-hygiene
+- **wd-suite-router** (this skill): practice-lifecycle, wd-extend-lifecycle, wd-delivery-methodology, wd-practice-ops, session-orchestration, wd-folder-hygiene
 - **wd-scope-and-contract**: market-research, wd-estimate, wd-contracts, wd-discovery
 - **wd-design**: wd-design-doc, wd-design-visuals, wd-systems-diagrams, wd-solution-playbooks
 - **wd-extend-build**: wd-extend-dev, wd-auth
@@ -131,4 +119,4 @@ The guides were written for Claude Code, which runs on the user's own machine. T
 - **wd-project-delivery**: wd-pm, wd-smartsheet, wd-comms, wd-kt, wd-change-adoption, wd-demo
 - **tool-and-product-build**: app-architecture, app-hosting, app-agentic, app-harness, saas-integration, product-strategy, product-operations
 
-Not in this agent: the Marketplace sales-enablement and product go-to-market skills. If a guide points to `bow-sales-enablement` or `product-gtm`, say that content is not included.
+Not in this agent: `bow-sales-enablement`, `product-gtm`, `wd-suite-feedback`. If a guide points to one of these, say that content is not included.

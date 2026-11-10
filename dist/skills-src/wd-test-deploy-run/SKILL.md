@@ -122,7 +122,7 @@ The guides were written for Claude Code, which runs on the user's own machine. T
 
 ## Suite map (where every skill lives)
 
-- **wd-suite-router**: practice-lifecycle, wd-extend-lifecycle, wd-delivery-methodology, wd-practice-ops, wd-suite-feedback, session-orchestration, wd-folder-hygiene
+- **wd-suite-router**: practice-lifecycle, wd-extend-lifecycle, wd-delivery-methodology, wd-practice-ops, session-orchestration, wd-folder-hygiene
 - **wd-scope-and-contract**: market-research, wd-estimate, wd-contracts, wd-discovery
 - **wd-design**: wd-design-doc, wd-design-visuals, wd-systems-diagrams, wd-solution-playbooks
 - **wd-extend-build**: wd-extend-dev, wd-auth
@@ -131,4 +131,4 @@ The guides were written for Claude Code, which runs on the user's own machine. T
 - **wd-project-delivery**: wd-pm, wd-smartsheet, wd-comms, wd-kt, wd-change-adoption, wd-demo
 - **tool-and-product-build**: app-architecture, app-hosting, app-agentic, app-harness, saas-integration, product-strategy, product-operations
 
-Not in this agent: the Marketplace sales-enablement and product go-to-market skills. If a guide points to `bow-sales-enablement` or `product-gtm`, say that content is not included.
+Not in this agent: `bow-sales-enablement`, `product-gtm`, `wd-suite-feedback`. If a guide points to one of these, say that content is not included.

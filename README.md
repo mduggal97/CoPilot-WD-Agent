@@ -4,7 +4,7 @@ The Workday practice skill suite, repackaged as one Microsoft 365 Copilot agent.
 
 ## At a glance
 
-- **What it is** - one Copilot agent that carries 36 suite skills as 8 uploadable skill packages.
+- **What it is** - one Copilot agent that carries 35 suite skills as 8 uploadable skill packages.
 - **What it does** - estimates, discovery, design, build guidance, test scenarios, deployment plans, status, client messages, training.
 - **What it cannot do** - run `wdcli`, touch a live tenant or Smartsheet, drive a browser, or run the suite's scripts.
   - It drafts and plans. It hands live steps back under "Finish this on your machine".
@@ -33,7 +33,10 @@ The Workday practice skill suite, repackaged as one Microsoft 365 Copilot agent.
 
 Each package holds a short router `SKILL.md`. Every original skill sits inside it, unchanged, as `<skill>/GUIDE.md` plus its `references/` folder.
 
-**Left out on purpose:** `bow-sales-enablement` and `product-gtm` (the sales-focused skills).
+**Left out on purpose:**
+
+- `bow-sales-enablement` and `product-gtm` - the sales-focused skills.
+- `wd-suite-feedback` - not needed in this agent.
 
 ---
 
@@ -64,7 +67,7 @@ All steps happen in your work browser at `https://m365.cloud.microsoft`.
 8. **Repeat step 7 for the other 7 zip files.** Order does not matter.
    - You should end with 8 skills listed.
 9. **Add conversation starters.** Copy each `title` and `text` pair from `dist/agent-profile.json`.
-10. **Leave Knowledge empty.** Do not add SharePoint sites. The skills carry the content.
+10. **Leave Knowledge empty.** Add no sites, files or other sources. The skills carry the content.
 11. **Select Create.**
 
 **Handshake:** tell Claude "agent created" plus anything that looked different from these steps. Claude then walks the acceptance tests below with you and fixes the package.
@@ -171,7 +174,7 @@ python -I -B build/build_copilot_agent.py --update-name-hashes
 
 ## What the build checks (22 checks)
 
-- **Scope** - all 36 in-scope skills packaged, none twice, no excluded skill present.
+- **Scope** - all 35 in-scope skills packaged, none twice, no excluded skill present.
 - **Platform limits** - 8 skills, each `SKILL.md` under 20,000 characters, 350 files total, folder depth, zip and file sizes, `SKILL.md` at the zip root.
 - **Agent text** - instructions under 8,000 characters and naming all 8 skills, name, description, 12 starters.
 - **Links** - every file path a `SKILL.md` lists exists in the package.
@@ -199,7 +202,7 @@ Also run separately on the unzipped package: `~/.claude/guards/firm_name_guard.p
 
 ## Backlog (ranked)
 
-1. **SharePoint knowledge fallback** - a Word-format copy for tenants where Skills is off. Retrieval is weaker and tables do not parse.
+1. **Fallback for tenants where Skills is off** - approach not chosen yet. Needed only if install step 4 shows no Skills section.
 2. **Agents Toolkit package** - `declarativeAgent.json` (manifest v1.9) for org-catalog publishing. Needs an admin to allow custom app upload.
 3. **Script sandbox testing** - find which of the 75 scripts run with no network and no installs, then ship those.
 4. **Routing tune-up** - adjust skill descriptions from acceptance-test results.

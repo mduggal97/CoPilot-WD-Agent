@@ -1,6 +1,6 @@
 {
   "suite_version": "v2.3 (2026-09-11)",
-  "_comment": "Single owner of the packaging map. suite_roster = all 38 skills in the suite. excluded = the sales-focused skills left out by decision on 2026-11-10. Every roster skill that is not excluded must appear in exactly one group; the build fails otherwise.",
+  "_comment": "Single owner of the packaging map. suite_roster = all 38 skills in the suite. excluded = skills left out by decision on 2026-11-10: the two sales-focused skills, and wd-suite-feedback (not needed in this agent). Every roster skill that is not excluded must appear in exactly one group; the build fails otherwise.",
   "suite_roster": [
     "practice-lifecycle",
     "wd-extend-lifecycle",
@@ -43,7 +43,8 @@
   ],
   "excluded": [
     "bow-sales-enablement",
-    "product-gtm"
+    "product-gtm",
+    "wd-suite-feedback"
   ],
   "_redactions_comment": "Applied in order to the PACKAGED copies only (regex -> replacement). GENERIC patterns only in this file. Real client, engagement and author names never go here: they live in build/private-names.local.json, which is git-ignored and applied first.",
   "redactions": [
@@ -56,13 +57,12 @@
     {
       "name": "wd-suite-router",
       "title": "Suite router, methodology and practice operations",
-      "description": "Front door for Workday practice work. Use when the user is starting something new, asks what to do next, which phase a project is in, which skill handles a task, or wants to be walked through a Workday Extend or integration project start to finish. Also owns the delivery quality gates, the kickoff checklist, the AI data-handling rules, full-program Workday deployment methodology (phases, roles, RACI, governance, configuration guides), practice operations (onboarding, certifications, staffing, utilization, partner program), project-folder structure and archiving rules, splitting work across sessions, and logging feedback about this skill suite.",
+      "description": "Front door for Workday practice work. Use when the user is starting something new, asks what to do next, which phase a project is in, which skill handles a task, or wants to be walked through a Workday Extend or integration project start to finish. Also owns the delivery quality gates, the kickoff checklist, the AI data-handling rules, full-program Workday deployment methodology (phases, roles, RACI, governance, configuration guides), practice operations (onboarding, certifications, staffing, utilization, partner program), project-folder structure and archiving rules, and splitting work across sessions.",
       "members": [
         "practice-lifecycle",
         "wd-extend-lifecycle",
         "wd-delivery-methodology",
         "wd-practice-ops",
-        "wd-suite-feedback",
         "session-orchestration",
         "wd-folder-hygiene"
       ]

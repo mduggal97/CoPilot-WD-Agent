@@ -3,7 +3,7 @@
 
 WHY THIS EXISTS
     A Microsoft 365 Copilot declarative agent accepts at most 8 skills, and each skill's
-    SKILL.md must stay under 20,000 characters. The Claude suite has 36 in-scope skills,
+    SKILL.md must stay under 20,000 characters. The Claude suite has 35 in-scope skills,
     several with a SKILL.md larger than that. So we do not rewrite anything: we MERGE.
     Each of the 8 Copilot skills is a thin "group router" SKILL.md, and every original
     skill rides along untouched inside it as <member>/GUIDE.md plus its references.
@@ -302,6 +302,9 @@ def genericize(target: Path, label: str, log: dict) -> None:
         log["redactions"].append(f"{label}: {total} replacement{'s' if total != 1 else ''}")
 
 
+EXCLUDED: list[str] = []   # filled from groups.json "excluded" in main()
+
+
 def build_group_skill_md(group: dict, groups: list[dict], members: dict) -> str:
     """Generate the group router SKILL.md.
 
@@ -362,7 +365,7 @@ def build_group_skill_md(group: dict, groups: list[dict], members: dict) -> str:
         out.append(f"- **{g['name']}**{here}: {', '.join(g['members'])}")
     out += [
         "",
-        "Not in this agent: the Marketplace sales-enablement and product go-to-market skills. If a guide points to `bow-sales-enablement` or `product-gtm`, say that content is not included.",
+        "Not in this agent: " + ", ".join(f"`{s}`" for s in EXCLUDED) + ". If a guide points to one of these, say that content is not included.",
         "",
     ]
     return "\n".join(out)
@@ -420,6 +423,7 @@ def main() -> int:
     suite = Path(args.suite)
     cfg = json.loads((HERE / "groups.json").read_text(encoding="utf-8"))
     groups = cfg["groups"]
+    EXCLUDED[:] = cfg["excluded"]
 
     checks: list[tuple[str, bool, str]] = []  # (name, passed, detail)
     log = {"skipped": [], "scripts_excluded": [], "flattened": [], "redactions": []}
@@ -489,7 +493,7 @@ def main() -> int:
     # Scope guard: excluded skills must never slip in; nothing in scope may be forgotten.
     all_members = [m for g in groups for m in g["members"]]
     leaked = sorted(set(all_members) & set(cfg["excluded"]))
-    checks.append(("No excluded (sales-focused) skill packaged", not leaked, ", ".join(leaked) or "none"))
+    checks.append(("No excluded skill packaged", not leaked, ", ".join(leaked) or "none"))
     dupes = sorted({m for m in all_members if all_members.count(m) > 1})
     checks.append(("No skill packaged twice", not dupes, ", ".join(dupes) or "none"))
     expected = set(cfg["suite_roster"]) - set(cfg["excluded"])

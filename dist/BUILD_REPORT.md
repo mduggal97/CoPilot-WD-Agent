@@ -11,21 +11,21 @@ Source suite: `v2.3 (2026-09-11)`. Limits checked against Microsoft Learn, 2026-
 - **PASS** - Name fingerprints match the private name list
   - in sync
 - **PASS** - Every listed member skill found in the suite
-  - 36 skills
+  - 35 skills
 - **PASS** - Every member has a description
   - all present
-- **PASS** - No excluded (sales-focused) skill packaged
+- **PASS** - No excluded skill packaged
   - none
 - **PASS** - No skill packaged twice
   - none
 - **PASS** - Every in-scope suite skill is packaged
-  - 36 of 36
+  - 35 of 35
 - **PASS** - Each SKILL.md under 20,000 characters
-  - wd-suite-router=13,957; wd-scope-and-contract=8,993; wd-design=11,388; wd-extend-build=10,122; wd-integration-build=5,564; wd-test-deploy-run=13,093; wd-project-delivery=11,129; tool-and-product-build=15,781
+  - wd-suite-router=12,633; wd-scope-and-contract=8,941; wd-design=11,336; wd-extend-build=10,070; wd-integration-build=5,512; wd-test-deploy-run=13,041; wd-project-delivery=11,077; tool-and-product-build=15,729
 - **PASS** - At most 8 skills
   - 8 skills
 - **PASS** - At most 350 files across all skills
-  - 311 files
+  - 307 files
 - **PASS** - Folder depth at most 3
   - deepest file sits 2 folders below the skill root
 - **PASS** - Each zip under 50 MB
@@ -35,7 +35,7 @@ Source suite: `v2.3 (2026-09-11)`. Limits checked against Microsoft Learn, 2026-
 - **PASS** - SKILL.md at the root of every zip
   - all 8
 - **PASS** - No script files shipped (v1 decision)
-  - 75 scripts held back
+  - 68 scripts held back
 - **PASS** - Every file path listed in a SKILL.md exists
   - all resolve
 - **PASS** - Agent instructions at most 8,000 characters
@@ -53,14 +53,14 @@ Source suite: `v2.3 (2026-09-11)`. Limits checked against Microsoft Learn, 2026-
 
 ## The 8 skill packages
 
-- **wd-suite-router.zip** - 7 member skills, 36 files, 140 KB, SKILL.md 13,957 characters
-- **wd-scope-and-contract.zip** - 4 member skills, 29 files, 117 KB, SKILL.md 8,993 characters
-- **wd-design.zip** - 4 member skills, 46 files, 234 KB, SKILL.md 11,388 characters
-- **wd-extend-build.zip** - 2 member skills, 46 files, 336 KB, SKILL.md 10,122 characters
-- **wd-integration-build.zip** - 1 member skill, 13 files, 87 KB, SKILL.md 5,564 characters
-- **wd-test-deploy-run.zip** - 5 member skills, 49 files, 236 KB, SKILL.md 13,093 characters
-- **wd-project-delivery.zip** - 6 member skills, 38 files, 119 KB, SKILL.md 11,129 characters
-- **tool-and-product-build.zip** - 7 member skills, 54 files, 334 KB, SKILL.md 15,781 characters
+- **wd-suite-router.zip** - 6 member skills, 32 files, 129 KB, SKILL.md 12,633 characters
+- **wd-scope-and-contract.zip** - 4 member skills, 29 files, 117 KB, SKILL.md 8,941 characters
+- **wd-design.zip** - 4 member skills, 46 files, 234 KB, SKILL.md 11,336 characters
+- **wd-extend-build.zip** - 2 member skills, 46 files, 336 KB, SKILL.md 10,070 characters
+- **wd-integration-build.zip** - 1 member skill, 13 files, 87 KB, SKILL.md 5,512 characters
+- **wd-test-deploy-run.zip** - 5 member skills, 49 files, 236 KB, SKILL.md 13,041 characters
+- **wd-project-delivery.zip** - 6 member skills, 38 files, 119 KB, SKILL.md 11,077 characters
+- **tool-and-product-build.zip** - 7 member skills, 54 files, 334 KB, SKILL.md 15,729 characters
 
 ## Sanitize sweep - blocking hits
 
@@ -78,18 +78,11 @@ A hit here is a pattern match, not a confirmed leak. Each one needs a human look
 - long numeric ID (sheet/workspace?): `wd-project-delivery/wd-smartsheet/references/api-details.md` line 86: `7654321098765432`
 - long numeric ID (sheet/workspace?): `wd-project-delivery/wd-smartsheet/references/smartsheet-registry-template.md` line 23: `0000000000000000`
 
-## Held back: scripts (75)
+## Held back: scripts (68)
 
 Not shipped in v1. See the README backlog, item 3.
 
 - wd-extend-lifecycle/scripts/setup_doctor.py
-- wd-suite-feedback/scripts/check_version.py
-- wd-suite-feedback/scripts/file_feedback_issue.py
-- wd-suite-feedback/scripts/log_feedback.py
-- wd-suite-feedback/scripts/pull_feedback.py
-- wd-suite-feedback/scripts/setup_autosync.py
-- wd-suite-feedback/scripts/triage_feedback.py
-- wd-suite-feedback/scripts/triage_issues.py
 - wd-folder-hygiene/scripts/archive_old_versions.py
 - wd-design-doc/scripts/build_extend_design_doc.py
 - wd-design-doc/scripts/build_idd_structure.py
